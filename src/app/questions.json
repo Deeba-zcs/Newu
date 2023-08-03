@@ -1,0 +1,1210 @@
+{
+    "status": true,
+    "statusCode": 200,
+    "message": "Questions list found",
+    "data": [
+      {
+        "id": 1,
+        "u_id": "QUE1000000001",
+        "question": "What is the challenge/issues you are facing ?",
+        "question_type": "mcq",
+        "status": true,
+        "created_at": "2023-07-20T12:29:01.054Z",
+        "updated_at": "2023-07-20T12:29:01.054Z",
+        "created_by": "ALL1000000001",
+        "updated_by": "ALL1000000001",
+        "questions_options": [
+          {
+            "id": 1,
+            "u_id": "QUO1000000001",
+            "option": "Business carrier",
+            "is_point": null,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.059Z",
+            "updated_at": "2023-07-20T12:29:01.059Z",
+            "questions_u_id": "QUE1000000001",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 2,
+            "u_id": "QUO1000000002",
+            "option": "Relationship",
+            "is_point": null,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.089Z",
+            "updated_at": "2023-07-20T12:29:01.089Z",
+            "questions_u_id": "QUE1000000001",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 3,
+            "u_id": "QUO1000000003",
+            "option": "Health",
+            "is_point": null,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.105Z",
+            "updated_at": "2023-07-20T12:29:01.105Z",
+            "questions_u_id": "QUE1000000001",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 4,
+            "u_id": "QUO1000000004",
+            "option": "Wealth money",
+            "is_point": null,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.116Z",
+            "updated_at": "2023-07-20T12:29:01.116Z",
+            "questions_u_id": "QUE1000000001",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 5,
+            "u_id": "QUO1000000005",
+            "option": "Spirituality SELF KNOWING …EMOTIONS ..IMAGES … QUALITIES . DOUBT",
+            "is_point": null,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.120Z",
+            "updated_at": "2023-07-20T12:29:01.120Z",
+            "questions_u_id": "QUE1000000001",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "u_id": "QUE1000000002",
+        "question": "Do you feel continuous stress ?",
+        "question_type": "radio",
+        "status": true,
+        "created_at": "2023-07-20T12:29:01.133Z",
+        "updated_at": "2023-07-20T12:29:01.133Z",
+        "created_by": "ALL1000000001",
+        "updated_by": "ALL1000000001",
+        "questions_options": [
+          {
+            "id": 6,
+            "u_id": "QUO1000000006",
+            "option": "Yes",
+            "is_point": true,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.148Z",
+            "updated_at": "2023-07-20T12:29:01.148Z",
+            "questions_u_id": "QUE1000000002",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 7,
+            "u_id": "QUO1000000007",
+            "option": "No",
+            "is_point": false,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.232Z",
+            "updated_at": "2023-07-20T12:29:01.232Z",
+            "questions_u_id": "QUE1000000002",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "u_id": "QUE1000000003",
+        "question": "Which part of body you have a pain ?",
+        "question_type": "mcq",
+        "status": true,
+        "created_at": "2023-07-20T12:29:01.252Z",
+        "updated_at": "2023-07-20T12:29:01.252Z",
+        "created_by": "ALL1000000001",
+        "updated_by": "ALL1000000001",
+        "questions_options": [
+          {
+            "id": 8,
+            "u_id": "QUO1000000008",
+            "option": "JOINT (KNEE ,SPINE, SHOULDER)",
+            "is_point": null,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.255Z",
+            "updated_at": "2023-07-20T12:29:01.255Z",
+            "questions_u_id": "QUE1000000003",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 9,
+            "u_id": "QUO1000000009",
+            "option": "HEADACHE (MIGRAINE)",
+            "is_point": null,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.267Z",
+            "updated_at": "2023-07-20T12:29:01.267Z",
+            "questions_u_id": "QUE1000000003",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 10,
+            "u_id": "QUO1000000010",
+            "option": "CHEST ASTHMA",
+            "is_point": null,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.271Z",
+            "updated_at": "2023-07-20T12:29:01.271Z",
+            "questions_u_id": "QUE1000000003",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "u_id": "QUE1000000004",
+        "question": "Any physical health issue ?",
+        "question_type": "mcq",
+        "status": true,
+        "created_at": "2023-07-20T12:29:01.282Z",
+        "updated_at": "2023-07-20T12:29:01.282Z",
+        "created_by": "ALL1000000001",
+        "updated_by": "ALL1000000001",
+        "questions_options": [
+          {
+            "id": 11,
+            "u_id": "QUO1000000011",
+            "option": "ASTHMA",
+            "is_point": null,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.286Z",
+            "updated_at": "2023-07-20T12:29:01.286Z",
+            "questions_u_id": "QUE1000000004",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 12,
+            "u_id": "QUO1000000012",
+            "option": "ACIDITY",
+            "is_point": null,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.292Z",
+            "updated_at": "2023-07-20T12:29:01.292Z",
+            "questions_u_id": "QUE1000000004",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 13,
+            "u_id": "QUO1000000013",
+            "option": "HYPER TENSION",
+            "is_point": null,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.401Z",
+            "updated_at": "2023-07-20T12:29:01.401Z",
+            "questions_u_id": "QUE1000000004",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 14,
+            "u_id": "QUO1000000014",
+            "option": "CHOLESTEROL",
+            "is_point": null,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.414Z",
+            "updated_at": "2023-07-20T12:29:01.414Z",
+            "questions_u_id": "QUE1000000004",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 15,
+            "u_id": "QUO1000000015",
+            "option": "DIABITIES",
+            "is_point": null,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.418Z",
+            "updated_at": "2023-07-20T12:29:01.418Z",
+            "questions_u_id": "QUE1000000004",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 16,
+            "u_id": "QUO1000000016",
+            "option": "KIDNEY STONES",
+            "is_point": null,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.421Z",
+            "updated_at": "2023-07-20T12:29:01.421Z",
+            "questions_u_id": "QUE1000000004",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 17,
+            "u_id": "QUO1000000017",
+            "option": "CANCER",
+            "is_point": null,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.425Z",
+            "updated_at": "2023-07-20T12:29:01.425Z",
+            "questions_u_id": "QUE1000000004",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 18,
+            "u_id": "QUO1000000018",
+            "option": "ANY OTHER BODY PART ISSUE",
+            "is_point": null,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.435Z",
+            "updated_at": "2023-07-20T12:29:01.435Z",
+            "questions_u_id": "QUE1000000004",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "u_id": "QUE1000000005",
+        "question": "Do you have any painful memory ?",
+        "question_type": "radio",
+        "status": true,
+        "created_at": "2023-07-20T12:29:01.450Z",
+        "updated_at": "2023-07-20T12:29:01.450Z",
+        "created_by": "ALL1000000001",
+        "updated_by": "ALL1000000001",
+        "questions_options": [
+          {
+            "id": 19,
+            "u_id": "QUO1000000019",
+            "option": "Yes",
+            "is_point": true,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.455Z",
+            "updated_at": "2023-07-20T12:29:01.455Z",
+            "questions_u_id": "QUE1000000005",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 20,
+            "u_id": "QUO1000000020",
+            "option": "No",
+            "is_point": false,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.476Z",
+            "updated_at": "2023-07-20T12:29:01.476Z",
+            "questions_u_id": "QUE1000000005",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "u_id": "QUE1000000006",
+        "question": "Have You faced any Relationship issue ? (BREAK UP, DIVORCE, DEATH OF SPOUSE)",
+        "question_type": "radio",
+        "status": true,
+        "created_at": "2023-07-20T12:29:01.491Z",
+        "updated_at": "2023-07-20T12:29:01.491Z",
+        "created_by": "ALL1000000001",
+        "updated_by": "ALL1000000001",
+        "questions_options": [
+          {
+            "id": 21,
+            "u_id": "QUO1000000021",
+            "option": "Yes",
+            "is_point": true,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.503Z",
+            "updated_at": "2023-07-20T12:29:01.503Z",
+            "questions_u_id": "QUE1000000006",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 22,
+            "u_id": "QUO1000000022",
+            "option": "No",
+            "is_point": false,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.524Z",
+            "updated_at": "2023-07-20T12:29:01.524Z",
+            "questions_u_id": "QUE1000000006",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "u_id": "QUE1000000007",
+        "question": "Have you feel financial loss in past?",
+        "question_type": "radio",
+        "status": true,
+        "created_at": "2023-07-20T12:29:01.550Z",
+        "updated_at": "2023-07-20T12:29:01.550Z",
+        "created_by": "ALL1000000001",
+        "updated_by": "ALL1000000001",
+        "questions_options": [
+          {
+            "id": 23,
+            "u_id": "QUO1000000023",
+            "option": "Yes",
+            "is_point": true,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.554Z",
+            "updated_at": "2023-07-20T12:29:01.554Z",
+            "questions_u_id": "QUE1000000007",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 24,
+            "u_id": "QUO1000000024",
+            "option": "No",
+            "is_point": false,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.557Z",
+            "updated_at": "2023-07-20T12:29:01.557Z",
+            "questions_u_id": "QUE1000000007",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "u_id": "QUE1000000008",
+        "question": "Do You have any unfulfilled wish or regret?",
+        "question_type": "radio",
+        "status": true,
+        "created_at": "2023-07-20T12:29:01.568Z",
+        "updated_at": "2023-07-20T12:29:01.568Z",
+        "created_by": "ALL1000000001",
+        "updated_by": "ALL1000000001",
+        "questions_options": [
+          {
+            "id": 25,
+            "u_id": "QUO1000000025",
+            "option": "Yes",
+            "is_point": true,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.575Z",
+            "updated_at": "2023-07-20T12:29:01.575Z",
+            "questions_u_id": "QUE1000000008",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 26,
+            "u_id": "QUO1000000026",
+            "option": "No",
+            "is_point": false,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.591Z",
+            "updated_at": "2023-07-20T12:29:01.591Z",
+            "questions_u_id": "QUE1000000008",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "u_id": "QUE1000000009",
+        "question": "Do you able to see your future ?",
+        "question_type": "radio",
+        "status": true,
+        "created_at": "2023-07-20T12:29:01.602Z",
+        "updated_at": "2023-07-20T12:29:01.602Z",
+        "created_by": "ALL1000000001",
+        "updated_by": "ALL1000000001",
+        "questions_options": [
+          {
+            "id": 27,
+            "u_id": "QUO1000000027",
+            "option": "Blank darkness / Something unclear",
+            "is_point": true,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.607Z",
+            "updated_at": "2023-07-20T12:29:01.607Z",
+            "questions_u_id": "QUE1000000009",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 28,
+            "u_id": "QUO1000000028",
+            "option": "Absolute clear",
+            "is_point": false,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.619Z",
+            "updated_at": "2023-07-20T12:29:01.619Z",
+            "questions_u_id": "QUE1000000009",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "u_id": "QUE1000000010",
+        "question": "Do you have any fear or phobia or allergy ?",
+        "question_type": "radio",
+        "status": true,
+        "created_at": "2023-07-20T12:29:01.623Z",
+        "updated_at": "2023-07-20T12:29:01.623Z",
+        "created_by": "ALL1000000001",
+        "updated_by": "ALL1000000001",
+        "questions_options": [
+          {
+            "id": 29,
+            "u_id": "QUO1000000029",
+            "option": "Yes",
+            "is_point": true,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.635Z",
+            "updated_at": "2023-07-20T12:29:01.635Z",
+            "questions_u_id": "QUE1000000010",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 30,
+            "u_id": "QUO1000000030",
+            "option": "No",
+            "is_point": false,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.640Z",
+            "updated_at": "2023-07-20T12:29:01.640Z",
+            "questions_u_id": "QUE1000000010",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "u_id": "QUE1000000011",
+        "question": "Have experienced depression, uneasiness or anxiety ?",
+        "question_type": "mcq",
+        "status": true,
+        "created_at": "2023-07-20T12:29:01.650Z",
+        "updated_at": "2023-07-20T12:29:01.650Z",
+        "created_by": "ALL1000000001",
+        "updated_by": "ALL1000000001",
+        "questions_options": [
+          {
+            "id": 31,
+            "u_id": "QUO1000000031",
+            "option": "Depression",
+            "is_point": true,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.653Z",
+            "updated_at": "2023-07-20T12:29:01.653Z",
+            "questions_u_id": "QUE1000000011",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 32,
+            "u_id": "QUO1000000032",
+            "option": "Uneasiness",
+            "is_point": true,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.656Z",
+            "updated_at": "2023-07-20T12:29:01.656Z",
+            "questions_u_id": "QUE1000000011",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 33,
+            "u_id": "QUO1000000033",
+            "option": "Anxiety",
+            "is_point": true,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.669Z",
+            "updated_at": "2023-07-20T12:29:01.669Z",
+            "questions_u_id": "QUE1000000011",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 34,
+            "u_id": "QUO1000000034",
+            "option": "Sleep disorder",
+            "is_point": true,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.672Z",
+            "updated_at": "2023-07-20T12:29:01.672Z",
+            "questions_u_id": "QUE1000000011",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 35,
+            "u_id": "QUO1000000035",
+            "option": "None",
+            "is_point": false,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.692Z",
+            "updated_at": "2023-07-20T12:29:01.692Z",
+            "questions_u_id": "QUE1000000011",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "u_id": "QUE1000000012",
+        "question": "(If you are Student)  Have you anxiety or stress about study ?",
+        "question_type": "radio",
+        "status": true,
+        "created_at": "2023-07-20T12:29:01.703Z",
+        "updated_at": "2023-07-20T12:29:01.703Z",
+        "created_by": "ALL1000000001",
+        "updated_by": "ALL1000000001",
+        "questions_options": [
+          {
+            "id": 36,
+            "u_id": "QUO1000000036",
+            "option": "Yes",
+            "is_point": true,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.753Z",
+            "updated_at": "2023-07-20T12:29:01.753Z",
+            "questions_u_id": "QUE1000000012",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 37,
+            "u_id": "QUO1000000037",
+            "option": "No",
+            "is_point": false,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.785Z",
+            "updated_at": "2023-07-20T12:29:01.785Z",
+            "questions_u_id": "QUE1000000012",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 38,
+            "u_id": "QUO1000000038",
+            "option": "None",
+            "is_point": false,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.800Z",
+            "updated_at": "2023-07-20T12:29:01.800Z",
+            "questions_u_id": "QUE1000000012",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "u_id": "QUE1000000013",
+        "question": "Do you take medicine for depression in past or currently ?",
+        "question_type": "radio",
+        "status": true,
+        "created_at": "2023-07-20T12:29:01.803Z",
+        "updated_at": "2023-07-20T12:29:01.803Z",
+        "created_by": "ALL1000000001",
+        "updated_by": "ALL1000000001",
+        "questions_options": [
+          {
+            "id": 39,
+            "u_id": "QUO1000000039",
+            "option": "Yes",
+            "is_point": true,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.817Z",
+            "updated_at": "2023-07-20T12:29:01.817Z",
+            "questions_u_id": "QUE1000000013",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 40,
+            "u_id": "QUO1000000040",
+            "option": "No",
+            "is_point": false,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.820Z",
+            "updated_at": "2023-07-20T12:29:01.820Z",
+            "questions_u_id": "QUE1000000013",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          }
+        ]
+      },
+      {
+        "id": 14,
+        "u_id": "QUE1000000014",
+        "question": "Do you listen to some unwanted internal dialog ?",
+        "question_type": "radio",
+        "status": true,
+        "created_at": "2023-07-20T12:29:01.823Z",
+        "updated_at": "2023-07-20T12:29:01.823Z",
+        "created_by": "ALL1000000001",
+        "updated_by": "ALL1000000001",
+        "questions_options": [
+          {
+            "id": 41,
+            "u_id": "QUO1000000041",
+            "option": "Yes",
+            "is_point": true,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.832Z",
+            "updated_at": "2023-07-20T12:29:01.832Z",
+            "questions_u_id": "QUE1000000014",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 42,
+            "u_id": "QUO1000000042",
+            "option": "No",
+            "is_point": false,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.835Z",
+            "updated_at": "2023-07-20T12:29:01.835Z",
+            "questions_u_id": "QUE1000000014",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          }
+        ]
+      },
+      {
+        "id": 15,
+        "u_id": "QUE1000000015",
+        "question": "How was your relation with parents & sibling ?",
+        "question_type": "radio",
+        "status": true,
+        "created_at": "2023-07-20T12:29:01.838Z",
+        "updated_at": "2023-07-20T12:29:01.838Z",
+        "created_by": "ALL1000000001",
+        "updated_by": "ALL1000000001",
+        "questions_options": [
+          {
+            "id": 43,
+            "u_id": "QUO1000000043",
+            "option": "Good/Best",
+            "is_point": false,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.841Z",
+            "updated_at": "2023-07-20T12:29:01.841Z",
+            "questions_u_id": "QUE1000000015",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 44,
+            "u_id": "QUO1000000044",
+            "option": "Worst",
+            "is_point": true,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.854Z",
+            "updated_at": "2023-07-20T12:29:01.854Z",
+            "questions_u_id": "QUE1000000015",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          }
+        ]
+      },
+      {
+        "id": 16,
+        "u_id": "QUE1000000016",
+        "question": "Have you lost someone in life ?",
+        "question_type": "radio",
+        "status": true,
+        "created_at": "2023-07-20T12:29:01.870Z",
+        "updated_at": "2023-07-20T12:29:01.870Z",
+        "created_by": "ALL1000000001",
+        "updated_by": "ALL1000000001",
+        "questions_options": [
+          {
+            "id": 45,
+            "u_id": "QUO1000000045",
+            "option": "Yes",
+            "is_point": true,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.875Z",
+            "updated_at": "2023-07-20T12:29:01.875Z",
+            "questions_u_id": "QUE1000000016",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 46,
+            "u_id": "QUO1000000046",
+            "option": "No",
+            "is_point": false,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.884Z",
+            "updated_at": "2023-07-20T12:29:01.884Z",
+            "questions_u_id": "QUE1000000016",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          }
+        ]
+      },
+      {
+        "id": 17,
+        "u_id": "QUE1000000017",
+        "question": "How was your childhood ?",
+        "question_type": "radio",
+        "status": true,
+        "created_at": "2023-07-20T12:29:01.904Z",
+        "updated_at": "2023-07-20T12:29:01.904Z",
+        "created_by": "ALL1000000001",
+        "updated_by": "ALL1000000001",
+        "questions_options": [
+          {
+            "id": 47,
+            "u_id": "QUO1000000047",
+            "option": "Happy & fantasy",
+            "is_point": false,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.907Z",
+            "updated_at": "2023-07-20T12:29:01.907Z",
+            "questions_u_id": "QUE1000000017",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 48,
+            "u_id": "QUO1000000048",
+            "option": "Sacrifices & guilty unhappy",
+            "is_point": true,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.920Z",
+            "updated_at": "2023-07-20T12:29:01.920Z",
+            "questions_u_id": "QUE1000000017",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          }
+        ]
+      },
+      {
+        "id": 18,
+        "u_id": "QUE1000000018",
+        "question": "Have you feel cheated in life ?",
+        "question_type": "radio",
+        "status": true,
+        "created_at": "2023-07-20T12:29:01.926Z",
+        "updated_at": "2023-07-20T12:29:01.926Z",
+        "created_by": "ALL1000000001",
+        "updated_by": "ALL1000000001",
+        "questions_options": [
+          {
+            "id": 49,
+            "u_id": "QUO1000000049",
+            "option": "Yes",
+            "is_point": true,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.936Z",
+            "updated_at": "2023-07-20T12:29:01.936Z",
+            "questions_u_id": "QUE1000000018",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 50,
+            "u_id": "QUO1000000050",
+            "option": "No",
+            "is_point": false,
+            "status": true,
+            "created_at": "2023-07-20T12:29:01.939Z",
+            "updated_at": "2023-07-20T12:29:01.939Z",
+            "questions_u_id": "QUE1000000018",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          }
+        ]
+      },
+      {
+        "id": 19,
+        "u_id": "QUE1000000019",
+        "question": "Do you being harsh or abuse  by someone ?",
+        "question_type": "radio",
+        "status": true,
+        "created_at": "2023-07-20T12:29:01.958Z",
+        "updated_at": "2023-07-20T12:29:01.958Z",
+        "created_by": "ALL1000000001",
+        "updated_by": "ALL1000000001",
+        "questions_options": [
+          {
+            "id": 51,
+            "u_id": "QUO1000000051",
+            "option": "Yes",
+            "is_point": true,
+            "status": true,
+            "created_at": "2023-07-20T12:29:02.008Z",
+            "updated_at": "2023-07-20T12:29:02.008Z",
+            "questions_u_id": "QUE1000000019",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 52,
+            "u_id": "QUO1000000052",
+            "option": "No",
+            "is_point": false,
+            "status": true,
+            "created_at": "2023-07-20T12:29:02.017Z",
+            "updated_at": "2023-07-20T12:29:02.017Z",
+            "questions_u_id": "QUE1000000019",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          }
+        ]
+      },
+      {
+        "id": 20,
+        "u_id": "QUE1000000020",
+        "question": "Do you feel revenge for someone ?",
+        "question_type": "radio",
+        "status": true,
+        "created_at": "2023-07-20T12:29:02.035Z",
+        "updated_at": "2023-07-20T12:29:02.035Z",
+        "created_by": "ALL1000000001",
+        "updated_by": "ALL1000000001",
+        "questions_options": [
+          {
+            "id": 53,
+            "u_id": "QUO1000000053",
+            "option": "Yes",
+            "is_point": true,
+            "status": true,
+            "created_at": "2023-07-20T12:29:02.040Z",
+            "updated_at": "2023-07-20T12:29:02.040Z",
+            "questions_u_id": "QUE1000000020",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 54,
+            "u_id": "QUO1000000054",
+            "option": "No",
+            "is_point": false,
+            "status": true,
+            "created_at": "2023-07-20T12:29:02.052Z",
+            "updated_at": "2023-07-20T12:29:02.052Z",
+            "questions_u_id": "QUE1000000020",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          }
+        ]
+      },
+      {
+        "id": 21,
+        "u_id": "QUE1000000021",
+        "question": "Do you feel Life have not played well with you ?",
+        "question_type": "radio",
+        "status": true,
+        "created_at": "2023-07-20T12:29:02.057Z",
+        "updated_at": "2023-07-20T12:29:02.057Z",
+        "created_by": "ALL1000000001",
+        "updated_by": "ALL1000000001",
+        "questions_options": [
+          {
+            "id": 55,
+            "u_id": "QUO1000000055",
+            "option": "Yes",
+            "is_point": true,
+            "status": true,
+            "created_at": "2023-07-20T12:29:02.085Z",
+            "updated_at": "2023-07-20T12:29:02.085Z",
+            "questions_u_id": "QUE1000000021",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 56,
+            "u_id": "QUO1000000056",
+            "option": "No",
+            "is_point": false,
+            "status": true,
+            "created_at": "2023-07-20T12:29:02.103Z",
+            "updated_at": "2023-07-20T12:29:02.103Z",
+            "questions_u_id": "QUE1000000021",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          }
+        ]
+      },
+      {
+        "id": 22,
+        "u_id": "QUE1000000022",
+        "question": "Are you able to sleep properly ?",
+        "question_type": "radio",
+        "status": true,
+        "created_at": "2023-07-20T12:29:02.134Z",
+        "updated_at": "2023-07-20T12:29:02.134Z",
+        "created_by": "ALL1000000001",
+        "updated_by": "ALL1000000001",
+        "questions_options": [
+          {
+            "id": 57,
+            "u_id": "QUO1000000057",
+            "option": "Yes",
+            "is_point": false,
+            "status": true,
+            "created_at": "2023-07-20T12:29:02.196Z",
+            "updated_at": "2023-07-20T12:29:02.196Z",
+            "questions_u_id": "QUE1000000022",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 58,
+            "u_id": "QUO1000000058",
+            "option": "No, ITS VERY MUCH  DIFFICULTY IN SLEEPING",
+            "is_point": true,
+            "status": true,
+            "created_at": "2023-07-20T12:29:02.219Z",
+            "updated_at": "2023-07-20T12:29:02.219Z",
+            "questions_u_id": "QUE1000000022",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          }
+        ]
+      },
+      {
+        "id": 23,
+        "u_id": "QUE1000000023",
+        "question": "Do you have any addictions ?",
+        "question_type": "mcq",
+        "status": true,
+        "created_at": "2023-07-20T12:29:02.223Z",
+        "updated_at": "2023-07-20T12:29:02.223Z",
+        "created_by": "ALL1000000001",
+        "updated_by": "ALL1000000001",
+        "questions_options": [
+          {
+            "id": 59,
+            "u_id": "QUO1000000059",
+            "option": "ALCOHOL",
+            "is_point": true,
+            "status": true,
+            "created_at": "2023-07-20T12:29:02.234Z",
+            "updated_at": "2023-07-20T12:29:02.234Z",
+            "questions_u_id": "QUE1000000023",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 60,
+            "u_id": "QUO1000000060",
+            "option": "SYRUP",
+            "is_point": true,
+            "status": true,
+            "created_at": "2023-07-20T12:29:02.238Z",
+            "updated_at": "2023-07-20T12:29:02.238Z",
+            "questions_u_id": "QUE1000000023",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 61,
+            "u_id": "QUO1000000061",
+            "option": "DRUGS",
+            "is_point": true,
+            "status": true,
+            "created_at": "2023-07-20T12:29:02.242Z",
+            "updated_at": "2023-07-20T12:29:02.242Z",
+            "questions_u_id": "QUE1000000023",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 62,
+            "u_id": "QUO1000000062",
+            "option": "CIRRATE",
+            "is_point": true,
+            "status": true,
+            "created_at": "2023-07-20T12:29:02.253Z",
+            "updated_at": "2023-07-20T12:29:02.253Z",
+            "questions_u_id": "QUE1000000023",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 63,
+            "u_id": "QUO1000000063",
+            "option": "TOBACCO",
+            "is_point": true,
+            "status": true,
+            "created_at": "2023-07-20T12:29:02.259Z",
+            "updated_at": "2023-07-20T12:29:02.259Z",
+            "questions_u_id": "QUE1000000023",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          }
+        ]
+      },
+      {
+        "id": 24,
+        "u_id": "QUE1000000024",
+        "question": "What you want to achieve now in your life ?",
+        "question_type": "mcq_input",
+        "status": true,
+        "created_at": "2023-07-20T12:29:02.270Z",
+        "updated_at": "2023-07-20T12:29:02.270Z",
+        "created_by": "ALL1000000001",
+        "updated_by": "ALL1000000001",
+        "questions_options": [
+          {
+            "id": 64,
+            "u_id": "QUO1000000064",
+            "option": "Business career",
+            "is_point": null,
+            "status": true,
+            "created_at": "2023-07-20T12:29:02.288Z",
+            "updated_at": "2023-07-20T12:29:02.288Z",
+            "questions_u_id": "QUE1000000024",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 65,
+            "u_id": "QUO1000000065",
+            "option": "Wealth",
+            "is_point": null,
+            "status": true,
+            "created_at": "2023-07-20T12:29:02.302Z",
+            "updated_at": "2023-07-20T12:29:02.302Z",
+            "questions_u_id": "QUE1000000024",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 66,
+            "u_id": "QUO1000000066",
+            "option": "Health",
+            "is_point": null,
+            "status": true,
+            "created_at": "2023-07-20T12:29:02.584Z",
+            "updated_at": "2023-07-20T12:29:02.584Z",
+            "questions_u_id": "QUE1000000024",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 67,
+            "u_id": "QUO1000000067",
+            "option": "Relationship",
+            "is_point": null,
+            "status": true,
+            "created_at": "2023-07-20T12:29:02.754Z",
+            "updated_at": "2023-07-20T12:29:02.754Z",
+            "questions_u_id": "QUE1000000024",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 68,
+            "u_id": "QUO1000000068",
+            "option": "Family",
+            "is_point": null,
+            "status": true,
+            "created_at": "2023-07-20T12:29:02.813Z",
+            "updated_at": "2023-07-20T12:29:02.813Z",
+            "questions_u_id": "QUE1000000024",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 69,
+            "u_id": "QUO1000000069",
+            "option": "Spirituality",
+            "is_point": null,
+            "status": true,
+            "created_at": "2023-07-20T12:29:02.824Z",
+            "updated_at": "2023-07-20T12:29:02.824Z",
+            "questions_u_id": "QUE1000000024",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          }
+        ]
+      },
+      {
+        "id": 25,
+        "u_id": "QUE1000000025",
+        "question": "Do you feel challenges are bigger than you ?",
+        "question_type": "radio",
+        "status": true,
+        "created_at": "2023-07-20T12:29:02.834Z",
+        "updated_at": "2023-07-20T12:29:02.834Z",
+        "created_by": "ALL1000000001",
+        "updated_by": "ALL1000000001",
+        "questions_options": [
+          {
+            "id": 70,
+            "u_id": "QUO1000000070",
+            "option": "Yes",
+            "is_point": true,
+            "status": true,
+            "created_at": "2023-07-20T12:29:02.841Z",
+            "updated_at": "2023-07-20T12:29:02.841Z",
+            "questions_u_id": "QUE1000000025",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          },
+          {
+            "id": 71,
+            "u_id": "QUO1000000071",
+            "option": "No",
+            "is_point": false,
+            "status": true,
+            "created_at": "2023-07-20T12:29:02.855Z",
+            "updated_at": "2023-07-20T12:29:02.855Z",
+            "questions_u_id": "QUE1000000025",
+            "created_by": "ALL1000000001",
+            "updated_by": "ALL1000000001"
+          }
+        ]
+      },
+  
+      {
+        "id": 26,
+        "u_id": "QUE1000000026",
+        "question": "What are your hobbies ?",
+        "question_type": "text",
+        "status": true,
+        "created_at": "2023-07-20T12:29:02.869Z",
+        "updated_at": "2023-07-20T12:29:02.869Z",
+        "created_by": "ALL1000000001",
+        "updated_by": "ALL1000000001",
+        "questions_options": []
+      },
+      {
+        "id": 27,
+        "u_id": "QUE1000000027",
+        "question": "What are the benefits if you get rid of issues ?",
+        "question_type": "text",
+        "status": true,
+        "created_at": "2023-07-20T12:29:02.872Z",
+        "updated_at": "2023-07-20T12:29:02.872Z",
+        "created_by": "ALL1000000001",
+        "updated_by": "ALL1000000001",
+        "questions_options": []
+      }
+    ]
+  }
+  
