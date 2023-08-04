@@ -110,7 +110,7 @@ const Question = () => {
                             <div className="col-3 my-3 circle">
                               {String.fromCharCode(65 + index)}
                             </div>
-                            <div className="col-8  my-3 ">
+                            <div className="col-8  my-3 tg">
                               <div className="form-check option">
                                 <input
                                   className="form-check-input chk"
