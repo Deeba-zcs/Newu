@@ -42,11 +42,13 @@ const Question = () => {
     }
     setSelectedOptions(updatedSelectedOptions);
   };
-
   const handleNextQuestion = () => {
     const nextQuestion = currentQuestion + 1;
-    if (nextQuestion < totalQuestions) {
-      console.log("Next clicked");
+    if (selectedOptions.length === 0) {
+      alert(
+        "Please select at least an option before proceeding to the next question."
+      );
+    } else if (nextQuestion < totalQuestions) {
       handleQuestionChange(nextQuestion);
     }
   };
@@ -96,7 +98,7 @@ const Question = () => {
                     </div>
                   </div>
                   <br />
-                  <div className="row">
+                  <div className="row" style={{ cursor: "pointer" }}>
                     {currentQuestionData.questions_options.map(
                       (option, index) => (
                         <div
@@ -106,11 +108,11 @@ const Question = () => {
                           key={index}
                           onClick={() => handleOptionSelect(index)}
                         >
-                          <div className="row">
+                          <div className="row" style={{ cursor: "pointer" }}>
                             <div className="col-3 my-3 circle">
                               {String.fromCharCode(65 + index)}
                             </div>
-                            <div className="col-8  my-3 tg">
+                            <div className="col-8 my-3">
                               <div className="form-check option">
                                 <input
                                   className="form-check-input chk"
@@ -156,7 +158,7 @@ const Question = () => {
                   </div>
 
                   <div className="row  btnsv-prev-next">
-                    <div className="col-6">
+                    <div className="col-lg-6 col-md-12 mb-3">
                       {currentQuestion > 0 && (
                         <button
                           type="button"
@@ -172,14 +174,16 @@ const Question = () => {
                         </button>
                       )}
                     </div>
-                    <div className="col-6">
+                    <div className="col-lg-6 col-md-12 mb-3">
                       {currentQuestion < totalQuestions - 1 ? (
                         <button
                           type="button"
-                          className="btnsv btnsv-next"
                           onClick={handleNextQuestion}
+                          className={`btnsv btnsv-next ${
+                            selectedOptions.length === 0 ? "disabled" : ""
+                          }`}
                         >
-                          Next{" "}
+                          Next
                           <i
                             className="fa-solid fa-arrow-right "
                             style={{ color: "#eeeff2" }}
