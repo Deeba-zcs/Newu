@@ -9,7 +9,7 @@ const Question = () => {
   const totalQuestions = jsonData.data.length;
   const currentQuestionData = jsonData.data[currentQuestion];
   const [selectedOptions, setSelectedOptions] = useState([]);
-
+  const [errorMessage, setErrorMessage] = useState("");
   const progress = ((currentQuestion + 1) / totalQuestions) * 100;
   const [progressBarClass, setProgressBarClass] = useState();
 
@@ -19,12 +19,10 @@ const Question = () => {
     );
   }, [currentQuestion, progress]);
 
-  console.log("progress", progress);
-  console.log("progressBarClasssss", progressBarClass);
-
   const handleQuestionChange = (questionIndex) => {
     setCurrentQuestion(questionIndex);
     setSelectedOptions([]);
+    setErrorMessage("");
   };
 
   const handleOptionSelect = (optionIndex) => {
@@ -41,30 +39,31 @@ const Question = () => {
       }
     }
     setSelectedOptions(updatedSelectedOptions);
+    setErrorMessage("");
   };
-  const handleNextQuestion = () => {
-    const nextQuestion = currentQuestion + 1;
+
+  const handleNextQuestion = (event) => {
+    event.preventDefault(); // Prevent form submission
+
     if (selectedOptions.length === 0) {
-      alert(
-        "Please select at least an option before proceeding to the next question."
+      setErrorMessage(
+        "Please select at least one option before proceeding to the next question."
       );
-    } else if (nextQuestion < totalQuestions) {
-      handleQuestionChange(nextQuestion);
+    } else {
+      setErrorMessage("");
+      const nextQuestion = currentQuestion + 1;
+      if (nextQuestion < totalQuestions) {
+        handleQuestionChange(nextQuestion);
+      }
     }
   };
 
   const handlePreviousQuestion = () => {
     const prevQuestion = currentQuestion - 1;
     if (prevQuestion >= 0) {
-      console.log("Prev clicked");
       handleQuestionChange(prevQuestion);
     }
   };
-
-  console.log("currentQuestion:", currentQuestion);
-  console.log("totalQuestions:", totalQuestions);
-
-  console.log("progress:", progress);
 
   return (
     <>
@@ -77,7 +76,13 @@ const Question = () => {
             ></div>
           </div>
           <div className="row">
-            <div className="col-lg-8">
+            <div
+              className="col-lg-8 "
+              // style={{
+              //   marginTop: "50px!important",
+              //   marginBottom: "50px!imporant",
+              // }}
+            >
               <p
                 className="font-poppins-regular"
                 style={{
@@ -88,10 +93,10 @@ const Question = () => {
               >
                 Question {currentQuestion + 1} of {totalQuestions}
               </p>
-              <form>
+              <form onSubmit={handleNextQuestion}>
                 <div className="form-group">
                   <div className="row">
-                    <div className="col-lg-12">
+                    <div className="col-lg-12 ques">
                       <label htmlFor={`question_${currentQuestion}`}>
                         <strong>{currentQuestionData.question}</strong>
                       </label>
@@ -102,14 +107,14 @@ const Question = () => {
                     {currentQuestionData.questions_options.map(
                       (option, index) => (
                         <div
-                          className={`col-lg-5 opt col-md-12  ${
+                          className={`col-lg-5 opt col-md-6  ${
                             selectedOptions.includes(index) ? "selected" : ""
                           }`}
                           key={index}
                           onClick={() => handleOptionSelect(index)}
                         >
                           <div className="row" style={{ cursor: "pointer" }}>
-                            <div className="col-3 my-3 circle">
+                            <div className="col-3 circle">
                               {String.fromCharCode(65 + index)}
                             </div>
                             <div className="col-8 my-3">
@@ -129,7 +134,7 @@ const Question = () => {
                                   onChange={() => handleOptionSelect(index)}
                                 />
                                 <label
-                                  className="form-check-label"
+                                  className="form-check-label rt"
                                   htmlFor={`option_${currentQuestion}_${index}`}
                                 >
                                   <strong>{option.option}</strong>
@@ -149,6 +154,7 @@ const Question = () => {
                       )
                     )}
                   </div>
+
                   <div className="row my-3">
                     <input
                       type="text"
@@ -156,36 +162,40 @@ const Question = () => {
                       className="txt"
                     />
                   </div>
-
-                  <div className="row  btnsv-prev-next">
-                    <div className="col-lg-6 col-md-12 mb-3">
+                  <div className="row my-3">
+                    {errorMessage && (
+                      <p style={{ color: "red", marginBottom: "0" }}>
+                        {errorMessage}
+                      </p>
+                    )}
+                  </div>
+                  <div className="row btnsv-prev-next">
+                    <div className="col-lg-6 col-md-6 mb-3">
                       {currentQuestion > 0 && (
                         <button
                           type="button"
                           className="btnsv btnsv-prev"
                           onClick={handlePreviousQuestion}
                         >
-                          {" "}
                           <i
-                            className="fa-solid fa-arrow-left"
+                            className="fa-solid fa-arrow-left me-1"
                             style={{ color: "#eeeff2" }}
-                          ></i>
-                          Previous{" "}
+                          ></i>{" "}
+                          Previous
                         </button>
                       )}
                     </div>
-                    <div className="col-lg-6 col-md-12 mb-3">
+                    <div className="col-lg-6 col-md-6 mb-3">
                       {currentQuestion < totalQuestions - 1 ? (
                         <button
-                          type="button"
-                          onClick={handleNextQuestion}
+                          type="submit"
                           className={`btnsv btnsv-next ${
                             selectedOptions.length === 0 ? "disabled" : ""
                           }`}
                         >
                           Next
                           <i
-                            className="fa-solid fa-arrow-right "
+                            className="fa-solid fa-arrow-right ms-1"
                             style={{ color: "#eeeff2" }}
                           ></i>
                         </button>
