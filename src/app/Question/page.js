@@ -33,8 +33,9 @@ const Question = () => {
     const { value } = event.target;
     const updatedTextInputs = [...textInputs];
     updatedTextInputs[currentQuestion] = value;
-    console.log("updatedtext");
+
     setTextInputs(updatedTextInputs);
+    console.log("updatedtext", textInputs);
   };
   const handleOptionSelect = (optionIndex) => {
     const selectedOption = currentQuestionData.questions_options[optionIndex];
@@ -266,6 +267,22 @@ const Question = () => {
           </div>
         </div>
       </div>
+      {/* {showResult && (
+        <div className="row">
+          <div className="col-lg-8">
+            <h3>Results:</h3>
+            {allSelectedOptionsData.map((data, questionIndex) => (
+              <div key={questionIndex}>
+                <p>
+                  Question {questionIndex + 1} - Selected Options:{" "}
+                  {data.options.map((option) => option.option).join(", ")}
+                </p>
+                {data.text && <p>Text: {data.text}</p>}
+              </div>
+            ))}
+          </div>
+        </div>
+      )} */}
     </>
   );
 };
