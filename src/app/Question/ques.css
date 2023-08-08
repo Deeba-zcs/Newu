@@ -69,7 +69,7 @@
 }
 
 .ques {
-  font-size: 18px;
+  font-size: 22px;
 }
 .gb {
   margin-top: 32px !important;
@@ -117,12 +117,12 @@
 .iom {
   max-width: 100%;
   height: auto;
-  margin-top: 220px !important;
-  margin-left: 36px;
+  margin-top: 230px !important;
+  margin-left: 120px;
 }
 
 @media screen and (max-width: 1200px) {
-  .imagg {
+  .iom {
     display: none;
   }
 }

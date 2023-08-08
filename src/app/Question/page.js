@@ -13,10 +13,10 @@ const Question = () => {
   const progress = ((currentQuestion + 1) / totalQuestions) * 100;
   const [progressBarClass, setProgressBarClass] = useState();
   const isTextQuestion = currentQuestionData.question_type === "text";
-
+  const [textInputs, setTextInputs] = useState([]);
   const [allSelectedOptionsData, setAllSelectedOptionsData] = useState([]);
   const [showResult, setShowResult] = useState(false);
-  const [arrayoption, setarrayoption] = useState([]);
+
   useEffect(() => {
     setProgressBarClass(
       `progress-bar progress-bar-${Math.floor(progress / 25) * 25}`
@@ -29,8 +29,12 @@ const Question = () => {
     setErrorMessage("");
   };
   const handleTextInputChange = (event) => {
+    console.log("event.target", event.target.value);
     const { value } = event.target;
-    setSelectedOptions([value]);
+    const updatedTextInputs = [...textInputs];
+    updatedTextInputs[currentQuestion] = value;
+    console.log("updatedtext");
+    setTextInputs(updatedTextInputs);
   };
   const handleOptionSelect = (optionIndex) => {
     const selectedOption = currentQuestionData.questions_options[optionIndex];
@@ -54,40 +58,43 @@ const Question = () => {
   };
   const handleNextQuestion = (event) => {
     event.preventDefault();
-    if (selectedOptions.length === 0) {
+    const nextQuestion = currentQuestion + 1;
+
+    if (!isTextQuestion && selectedOptions.length === 0) {
       setErrorMessage(
         "Please select at least one option before proceeding to the next question."
       );
     } else {
       setErrorMessage("");
-      const nextQuestion = currentQuestion + 1;
-      if (nextQuestion < totalQuestions) {
-        // Push the selected options of the current question into the array
-        setAllSelectedOptionsData((prevData) => [
-          ...prevData,
-          selectedOptions.map((optionIndex) => {
+
+      const selectedOptionsForCurrentQuestion = isTextQuestion
+        ? selectedOptions
+        : selectedOptions.filter((optionIndex) => {
+            return optionIndex !== currentQuestionData.questions_options.length;
+          });
+
+      setAllSelectedOptionsData((prevData) => [
+        ...prevData,
+        {
+          options: selectedOptionsForCurrentQuestion.map((optionIndex) => {
             return currentQuestionData.questions_options[optionIndex];
           }),
-        ]);
+          text: textInputs[currentQuestion] || "",
+        },
+      ]);
+
+      if (nextQuestion < totalQuestions) {
         handleQuestionChange(nextQuestion);
       } else {
-        // For the last question, also push the selected options into the array
-        setAllSelectedOptionsData((prevData) => [
-          ...prevData,
-          selectedOptions.map((optionIndex) => {
-            return currentQuestionData.questions_options[optionIndex];
-          }),
-        ]);
-
         setShowResult(true);
+        console.log("showResult", showResult);
         console.log("All Selected Options Data:", allSelectedOptionsData);
-        allSelectedOptionsData.map((d) => {
-          return console.log("d.option", d.option);
-        });
+        // allSelectedOptionsData.map((d) => {
+        //   return console.log("d.option", d.option);
+        // });
       }
     }
   };
-
   const handlePreviousQuestion = () => {
     const prevQuestion = currentQuestion - 1;
     if (prevQuestion >= 0) {
@@ -110,7 +117,7 @@ const Question = () => {
               <p
                 className="font-poppins-regular"
                 style={{
-                  fontSize: "16px",
+                  fontSize: "18px",
                   color: "rgb(226, 104, 60)",
                   marginTop: "20px",
                 }}
@@ -135,6 +142,7 @@ const Question = () => {
                           placeholder="Enter Text"
                           className="txt"
                           onChange={handleTextInputChange}
+                          value={textInputs[currentQuestion] || ""}
                         />
                       </div>
                     </div>
@@ -200,6 +208,8 @@ const Question = () => {
                             type="text"
                             placeholder="Enter Text"
                             className="txt"
+                            onChange={handleTextInputChange}
+                            value={textInputs[currentQuestion] || ""}
                           />
                         </div>
                       </>
