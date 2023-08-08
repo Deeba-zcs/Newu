@@ -16,7 +16,7 @@ const Question = () => {
   const [textInputs, setTextInputs] = useState([]);
   const [allSelectedOptionsData, setAllSelectedOptionsData] = useState([]);
   const [showResult, setShowResult] = useState(false);
-
+  const [userResponses, setUserResponses] = useState([]);
   useEffect(() => {
     setProgressBarClass(
       `progress-bar progress-bar-${Math.floor(progress / 25) * 25}`
@@ -24,8 +24,17 @@ const Question = () => {
   }, [currentQuestion, progress]);
 
   const handleQuestionChange = (questionIndex) => {
+    const response = {
+      selectedOptions: selectedOptions,
+      textInputs: textInputs,
+    };
+    const updatedResponses = [...userResponses];
+    updatedResponses[currentQuestion] = response;
+    setUserResponses(updatedResponses);
+
     setCurrentQuestion(questionIndex);
-    setSelectedOptions([]);
+    setSelectedOptions(userResponses[questionIndex]?.selectedOptions || []);
+    setTextInputs(userResponses[questionIndex]?.textInputs || []);
     setErrorMessage("");
   };
   const handleTextInputChange = (event) => {
@@ -33,7 +42,13 @@ const Question = () => {
     const { value } = event.target;
     const updatedTextInputs = [...textInputs];
     updatedTextInputs[currentQuestion] = value;
-
+    const response = {
+      selectedOptions: selectedOptions,
+      textInputs: updatedTextInputs,
+    };
+    const updatedResponses = [...userResponses];
+    updatedResponses[currentQuestion] = response;
+    setUserResponses(updatedResponses);
     setTextInputs(updatedTextInputs);
     console.log("updatedtext", textInputs);
   };
@@ -41,6 +56,13 @@ const Question = () => {
     const selectedOption = currentQuestionData.questions_options[optionIndex];
 
     let updatedSelectedOptions;
+    const response = {
+      selectedOptions: updatedSelectedOptions,
+      textInputs: textInputs,
+    };
+    const updatedResponses = [...userResponses];
+    updatedResponses[currentQuestion] = response;
+    setUserResponses(updatedResponses);
 
     if (currentQuestionData.question_type === "radio") {
       updatedSelectedOptions = [optionIndex];
@@ -67,42 +89,56 @@ const Question = () => {
       );
     } else {
       setErrorMessage("");
+      let updatedSelectedOptions;
 
-      const selectedOptionsForCurrentQuestion = isTextQuestion
-        ? selectedOptions
-        : selectedOptions.filter((optionIndex) => {
-            return optionIndex !== currentQuestionData.questions_options.length;
-          });
+      if (currentQuestionData.question_type === "radio") {
+        updatedSelectedOptions = [selectedOptions[0]];
+      } else {
+        updatedSelectedOptions = selectedOptions.slice();
+      }
 
-      setAllSelectedOptionsData((prevData) => [
-        ...prevData,
-        {
-          options: selectedOptionsForCurrentQuestion.map((optionIndex) => {
-            return currentQuestionData.questions_options[optionIndex];
-          }),
-          text: textInputs[currentQuestion] || "",
-        },
-      ]);
+      const response = {
+        selectedOptions: updatedSelectedOptions,
+        textInputs: textInputs,
+      };
+
+      const updatedResponses = [...userResponses];
+      updatedResponses[currentQuestion] = response;
+      setUserResponses(updatedResponses);
 
       if (nextQuestion < totalQuestions) {
+        if (userResponses[nextQuestion]) {
+          const nextResponse = userResponses[nextQuestion];
+          setSelectedOptions(nextResponse.selectedOptions);
+          setTextInputs(nextResponse.textInputs);
+        } else {
+          setSelectedOptions([]);
+          setTextInputs([]);
+        }
         handleQuestionChange(nextQuestion);
       } else {
         setShowResult(true);
-        console.log("showResult", showResult);
-        console.log("All Selected Options Data:", allSelectedOptionsData);
-        // allSelectedOptionsData.map((d) => {
-        //   return console.log("d.option", d.option);
-        // });
       }
     }
   };
+
   const handlePreviousQuestion = () => {
     const prevQuestion = currentQuestion - 1;
     if (prevQuestion >= 0) {
-      handleQuestionChange(prevQuestion);
+      const response = {
+        selectedOptions: selectedOptions,
+        textInputs: textInputs,
+      };
+      const updatedResponses = [...userResponses];
+      updatedResponses[currentQuestion] = response;
+      setUserResponses(updatedResponses);
+
+      setCurrentQuestion(prevQuestion);
+      setSelectedOptions(userResponses[prevQuestion]?.selectedOptions || []);
+      setTextInputs(userResponses[prevQuestion]?.textInputs || []);
+      setErrorMessage("");
     }
   };
-
   return (
     <>
       <div className="container-fluid screen">
