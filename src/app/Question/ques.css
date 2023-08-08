@@ -83,6 +83,7 @@
   padding: 10px;
   margin-bottom: 30px;
   outline: none;
+  width: 700px;
 }
 
 .txt:focus {
@@ -121,9 +122,16 @@
   margin-left: 120px;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 991px) {
   .iom {
     display: none;
+  }
+
+  .btnsv-prev-next {
+    text-align: center !important;
+  }
+  .txt {
+    width: 350px;
   }
 }
 

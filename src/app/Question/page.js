@@ -14,7 +14,7 @@ const Question = () => {
   const [progressBarClass, setProgressBarClass] = useState();
   const isTextQuestion = currentQuestionData.question_type === "text";
   const [textInputs, setTextInputs] = useState([]);
-  const [allSelectedOptionsData, setAllSelectedOptionsData] = useState([]);
+
   const [showResult, setShowResult] = useState(false);
   const [userResponses, setUserResponses] = useState([]);
   useEffect(() => {
@@ -133,6 +133,7 @@ const Question = () => {
       updatedResponses[currentQuestion] = response;
       setUserResponses(updatedResponses);
 
+      console.log("response.selected.option", response.selectedOptions);
       setCurrentQuestion(prevQuestion);
       setSelectedOptions(userResponses[prevQuestion]?.selectedOptions || []);
       setTextInputs(userResponses[prevQuestion]?.textInputs || []);
@@ -173,7 +174,7 @@ const Question = () => {
                   <br />
                   {isTextQuestion ? (
                     <div className="row">
-                      <div className="col-lg-12">
+                      <div className="col-lg-12 col-md-6">
                         <input
                           type="text"
                           placeholder="Enter Text"
@@ -241,13 +242,15 @@ const Question = () => {
                           )
                         )}
                         <div className="row my-3">
-                          <input
-                            type="text"
-                            placeholder="Enter Text"
-                            className="txt"
-                            onChange={handleTextInputChange}
-                            value={textInputs[currentQuestion] || ""}
-                          />
+                          <div className="col-lg-12 col-md-6">
+                            <input
+                              type="text"
+                              placeholder="Enter Text"
+                              className="txt"
+                              onChange={handleTextInputChange}
+                              value={textInputs[currentQuestion] || ""}
+                            />
+                          </div>
                         </div>
                       </>
                     </div>
@@ -303,22 +306,43 @@ const Question = () => {
           </div>
         </div>
       </div>
-      {/* {showResult && (
+      {showResult && (
         <div className="row">
           <div className="col-lg-8">
-            <h3>Results:</h3>
-            {allSelectedOptionsData.map((data, questionIndex) => (
-              <div key={questionIndex}>
-                <p>
-                  Question {questionIndex + 1} - Selected Options:{" "}
-                  {data.options.map((option) => option.option).join(", ")}
-                </p>
-                {data.text && <p>Text: {data.text}</p>}
-              </div>
-            ))}
+            <h3>List of selected options and text of questions:</h3>
+            <ul>
+              {userResponses.map((response, index) => (
+                <li key={index}>
+                  <p>
+                    <strong>Question {index + 1}:</strong>{" "}
+                    {jsonData.data[index].question}
+                  </p>
+                  {jsonData.data[index].questions_options && (
+                    <p>
+                      <strong>Selected Options:</strong>{" "}
+                      {response.selectedOptions.map((optionIndex) => (
+                        <span key={optionIndex}>
+                          {
+                            jsonData.data[index].questions_options[optionIndex]
+                              .option
+                          }
+                          ,{" "}
+                        </span>
+                      ))}
+                    </p>
+                  )}
+                  {jsonData.data[index].question_type === "text" && (
+                    <p>
+                      <strong>Entered Text:</strong>{" "}
+                      {response.textInputs[index] || ""}
+                    </p>
+                  )}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
-      )} */}
+      )}
     </>
   );
 };
