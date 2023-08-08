@@ -271,8 +271,8 @@ const Question = () => {
                           onClick={handlePreviousQuestion}
                         >
                           <i
-                            className="fa-solid fa-arrow-left me-1"
-                            style={{ color: "#eeeff2" }}
+                            className="fa-solid fa-arrow-left  leftarrow"
+                            style={{ color: "#eeeff2", marginRight: "10px" }}
                           ></i>{" "}
                           Previous
                         </button>
@@ -284,7 +284,7 @@ const Question = () => {
                           ? "Next"
                           : "Submit"}{" "}
                         <i
-                          className="fa-solid fa-arrow-right"
+                          className="fa-solid fa-arrow-right rightarrow"
                           style={{ color: "#eeeff2" }}
                         ></i>
                       </button>
