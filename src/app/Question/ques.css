@@ -41,7 +41,7 @@
   transition: transform 0.5s ease-in-out;
 }
 .btnsv .rightarrow {
-  transform: translateX(10px);
+  transform: translateX(-8px);
   transition: transform 0.5s ease-in-out;
 }
 
@@ -62,7 +62,7 @@
   /* height: 65px; */
 }
 .selected {
-  background-color: #a9c45e; /* You can change this color to the one you want */
+  background-color: #a9c45e;
 }
 .circle {
   background-color: rgb(247, 247, 247);
@@ -91,7 +91,7 @@
   opacity: 0;
 }
 .txt {
-  border: 0px solid #cccccc;
+  border: 2px solid #fff;
   border-radius: 10px;
   padding: 10px;
   margin-bottom: 30px;
@@ -129,9 +129,9 @@
 }
 
 .iom {
-  max-width: 100%;
+  max-width: 90%;
   height: auto;
-  margin-top: 230px !important;
+  margin-top: 230px;
   margin-left: 120px;
 }
 
@@ -141,10 +141,18 @@
   }
 
   .btnsv-prev-next {
-    text-align: center !important;
+    text-align: center;
   }
   .txt {
-    width: 350px;
+    width: 100%;
+  }
+
+  .btnsv-prev-next .col-md-6 {
+    order: 2;
+  }
+
+  .btnsv-prev-next .btnsv-next {
+    order: 1;
   }
 }
 
@@ -153,7 +161,6 @@
   color: #fff;
 }
 
-/* Style for the previous and next buttons */
 .btnsv-prev-next {
   bottom: 10px;
 }

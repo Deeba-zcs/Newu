@@ -54,13 +54,15 @@ const Question = () => {
   };
   const handleOptionSelect = (optionIndex) => {
     const selectedOption = currentQuestionData.questions_options[optionIndex];
-
+    console.log("selectedOption", selectedOption);
     let updatedSelectedOptions;
     const response = {
       selectedOptions: updatedSelectedOptions,
       textInputs: textInputs,
     };
+    console.log("response", response);
     const updatedResponses = [...userResponses];
+    console.log("first", updatedResponses);
     updatedResponses[currentQuestion] = response;
     setUserResponses(updatedResponses);
 
@@ -120,6 +122,7 @@ const Question = () => {
         setShowResult(true);
       }
     }
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handlePreviousQuestion = () => {
@@ -136,9 +139,12 @@ const Question = () => {
       console.log("response.selected.option", response.selectedOptions);
       setCurrentQuestion(prevQuestion);
       setSelectedOptions(userResponses[prevQuestion]?.selectedOptions || []);
+      console.log("selectedoption", selectedOptions);
       setTextInputs(userResponses[prevQuestion]?.textInputs || []);
+      console.log("Inputs", textInputs);
       setErrorMessage("");
     }
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
   return (
     <>
@@ -174,7 +180,7 @@ const Question = () => {
                   <br />
                   {isTextQuestion ? (
                     <div className="row">
-                      <div className="col-lg-12 col-md-6">
+                      <div className="col-lg-12 ">
                         <input
                           type="text"
                           placeholder="Enter Text"
@@ -190,7 +196,7 @@ const Question = () => {
                         {currentQuestionData.questions_options.map(
                           (option, index) => (
                             <div
-                              className={`col-lg-5 opt col-md-6  ${
+                              className={`col-lg-5 opt   ${
                                 selectedOptions.includes(index)
                                   ? "selected"
                                   : ""
@@ -242,7 +248,7 @@ const Question = () => {
                           )
                         )}
                         <div className="row my-3">
-                          <div className="col-lg-12 col-md-6">
+                          <div className="col-lg-12 ">
                             <input
                               type="text"
                               placeholder="Enter Text"
@@ -262,30 +268,30 @@ const Question = () => {
                       </p>
                     )}
                   </div>
-                  <div className="row btnsv-prev-next">
-                    <div className="col-lg-6 col-md-6 mb-3">
+                  <div className="row btnsv-prev-next flex-column-reverse flex-xl-row">
+                    <div className="col-lg-6 mb-3  ">
                       {currentQuestion > 0 && (
                         <button
                           type="button"
-                          className="btnsv btnsv-prev"
+                          className="btnsv btnsv-prev "
                           onClick={handlePreviousQuestion}
                         >
                           <i
-                            className="fa-solid fa-arrow-left  leftarrow"
+                            className="fa-solid fa-arrow-left leftarrow"
                             style={{ color: "#eeeff2", marginRight: "10px" }}
                           ></i>{" "}
                           Previous
                         </button>
                       )}
                     </div>
-                    <div className="col-lg-6 col-md-6 mb-3">
-                      <button type="submit" className="btnsv btnsv-next">
+                    <div className="col-lg-6 mb-3  ">
+                      <button type="submit" className="btnsv btnsv-next ">
                         {currentQuestion < totalQuestions - 1
-                          ? "Next"
-                          : "Submit"}{" "}
+                          ? "Next Qusetion"
+                          : "Submit"}
                         <i
                           className="fa-solid fa-arrow-right rightarrow"
-                          style={{ color: "#eeeff2" }}
+                          style={{ color: "#eeeff2", marginLeft: "13px" }}
                         ></i>
                       </button>
                     </div>
@@ -317,24 +323,27 @@ const Question = () => {
                     <strong>Question {index + 1}:</strong>{" "}
                     {jsonData.data[index].question}
                   </p>
-                  {jsonData.data[index].questions_options && (
+
+                  {jsonData.data[index].questions_options &&
+                    response.selectedOptions.length > 0 && (
+                      <p>
+                        <strong>Selected Options:</strong>{" "}
+                        {response.selectedOptions.map((optionIndex) => (
+                          <span key={optionIndex}>
+                            {
+                              jsonData.data[index].questions_options[
+                                optionIndex
+                              ].option
+                            }
+                            ,{" "}
+                          </span>
+                        ))}
+                      </p>
+                    )}
+
+                  {response.textInputs && response.textInputs.length !=" " && (
                     <p>
-                      <strong>Selected Options:</strong>{" "}
-                      {response.selectedOptions.map((optionIndex) => (
-                        <span key={optionIndex}>
-                          {
-                            jsonData.data[index].questions_options[optionIndex]
-                              .option
-                          }
-                          ,{" "}
-                        </span>
-                      ))}
-                    </p>
-                  )}
-                  {jsonData.data[index].question_type === "text" && (
-                    <p>
-                      <strong>Entered Text:</strong>{" "}
-                      {response.textInputs[index] || ""}
+                      <strong>Entered Text:</strong> {response.textInputs}
                     </p>
                   )}
                 </li>
