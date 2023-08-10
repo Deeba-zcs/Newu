@@ -1,11 +1,23 @@
 "use client";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import React, { useState } from "react";
 import "./healer.css";
-
+// import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
+// import { SingleInputDateRangeField } from "@mui/x-date-pickers-pro/SingleInputDateRangeField";
 function Healer() {
   const timeSlots = generateTimeSlots();
+  const [selectedSlots, setSelectedSlots] = useState([]);
 
+  const toggleSlot = (index) => {
+    if (selectedSlots.includes(index)) {
+      setSelectedSlots(
+        selectedSlots.filter((slotIndex) => slotIndex !== index)
+      );
+    } else {
+      setSelectedSlots([...selectedSlots, index]);
+    }
+  };
   function generateTimeSlots() {
     const currentTime = new Date();
     const startTime = new Date(currentTime);
@@ -33,7 +45,12 @@ function Healer() {
 
     return timeSlots;
   }
+  const [selectedSlot, setSelectedSlot] = useState(null);
 
+  const showtime = (index) => {
+    console.log("Selected slot:", index);
+    setSelectedSlot(index);
+  };
   return (
     <>
       <div className=" mt-5">
@@ -41,62 +58,70 @@ function Healer() {
           <Card.Header className="bg-transparent border-0">
             <div className="row">
               <div
-                className="col-12 col-md-4"
+                className="col-12 col-md-6"
                 style={{
                   marginTop: "10px",
                   fontSize: "22px",
                   color: "rgb(120, 126, 139)",
-                  fontFamily: "Poppins",
+                  fontFamily: "Poppins,sans-serif",
                   fontWeight: "1000!important",
                 }}
               >
                 <h3 className="header mb-0">Add Healer Availability</h3>
               </div>
-              <div className="col-12 col-md-8 d-flex justify-content-md-end">
+              <div className="col-12 col-md-6 d-flex justify-content-md-end">
                 <Button
                   className="btn btn-primary"
                   style={{
                     backgroundColor: "rgb(120, 126, 139)",
                     border: "none",
-                    // marginLeft: "600px",
-                    // marginTop: "10px",
                     fontSize: "14px",
+                    paddingLeft: "25px",
+                    paddingRight: "25px",
+                    fontFamily: "Poppins,sans-serif",
                   }}
                 >
-                  <i className="fa-solid fa-plus"></i> ADD
+                  <i className="fa-solid fa-plus mx-1 "> </i> ADD
                 </Button>
               </div>
             </div>
           </Card.Header>
 
           <Card.Body>
-            <div className="container">
-              <form>
+            <div className="containerr">
+              <form className="mx-4">
                 <Card.Title>
                   <div className="mt-4">
                     <div>
                       <input
                         type="text"
-                        className="datadiv"
-                        placeholder="Select Date"
-                        onFocus={(e) => (e.target.type = "date")}
+                        className="datadiv px-3"
+                        placeholder="   Select Date"
+                        onFocus={(e) => {
+                          e.target.type = "date";
+                          e.target.min = "  yyyy-mm-dd";
+                        }}
                         onBlur={(e) => {
                           if (!e.target.value) {
                             e.target.type = "text";
+                            e.target.min = null;
                           }
                         }}
                       />
                     </div>
+                    {/* <DateRangePicker
+                      slots={{ field: SingleInputDateRangeField }}
+                    /> */}
                   </div>
                 </Card.Title>
                 <Card.Text>
-                  <strong>Selected Type:</strong>
+                  <strong>Select Type:</strong>
                   <br />
                   <div className="form-check form-check-inline mt-3">
                     <input
                       className="form-check-input"
                       type="radio"
-                      name="communicationMode"
+                      name="Mode"
                       id="videoRadio"
                       value="video"
                     />
@@ -108,7 +133,7 @@ function Healer() {
                     <input
                       className="form-check-input"
                       type="radio"
-                      name="communicationMode"
+                      name="Mode"
                       id="voiceRadio"
                       value="audio"
                     />
@@ -120,7 +145,7 @@ function Healer() {
                     <input
                       className="form-check-input"
                       type="radio"
-                      name="communicationMode"
+                      name="Mode"
                       id="chatRadio"
                       value="chat"
                     />
@@ -131,13 +156,32 @@ function Healer() {
                 </Card.Text>
                 <Card.Text>
                   <div className="divtimeslot">
-                    <strong className="mb-3">Selected Time:</strong>
+                    <strong className="mb-3">Select Time:</strong>
                     <div className="mt-2">
-                      {timeSlots.map((timeSlot, index) => (
-                        <Button key={index} className="btntime">
-                          {timeSlot}
-                        </Button>
-                      ))}
+                      <div>
+                        {timeSlots.map((timeSlot, index) => (
+                          <Button
+                            key={index}
+                            style={{
+                              backgroundColor: selectedSlots.includes(index)
+                                ? "red"
+                                : "rgb(120, 126, 139)",
+                              color: selectedSlots.includes(index)
+                                ? "white"
+                                : "",
+                              borderRadius: "40px",
+                              margin: "3px",
+                              padding: "5px",
+                              border: "none",
+                              fontSize: "14px",
+                              fontFamily: "Poppins",
+                            }}
+                            onClick={() => toggleSlot(index)}
+                          >
+                            {timeSlot}
+                          </Button>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </Card.Text>
@@ -146,8 +190,10 @@ function Healer() {
           </Card.Body>
 
           <Card.Footer className="text-muted">
-            <Button className="divbtn">ADD</Button>
-            <Button className="btn btn-secondary mx-2 mt-2">Cancel</Button>
+            <Button className="divbtn" style={{ backgroundColor: "red" }}>
+              ADD
+            </Button>
+            <Button className="btn btn-secondary  mx-2 divbtn">CANCEL</Button>
           </Card.Footer>
         </Card>
       </div>

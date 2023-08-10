@@ -4,7 +4,7 @@
   font-family: "Poppins", sans-serif;
   font-weight: 800;
 }
-.container {
+.containerr {
   border: 2px solid rgb(185, 178, 178);
 }
 .buttonStyle {
@@ -38,17 +38,24 @@
   font-size: 15px !important;
 }
 .divbtn {
-  width: 75px;
-  height: 37px;
   margin-bottom: 10px;
   margin-top: 20px;
   top: 147px;
   left: 1211px;
   font-size: 14px !important;
+  padding-left: 25px !important;
+  padding-right: 25px !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
   border-radius: 15px;
-  background-color: red !important;
+  /* background-color: red !important; */
   border: none !important;
   font-family: "Poppins", sans-serif;
+}
+
+.btntime.selected {
+  background-color: red;
+  color: white;
 }
 
 .form-check-input {
@@ -56,7 +63,7 @@
   border-color: rgb(120, 126, 139) !important  ;
 }
 .form-check-input:checked {
-  border-color: rgb(120, 126, 139) !important  ;
-  background-color: rgb(64, 65, 65) !important;
+  border-color: red !important  ;
+  background-color: red !important;
   box-shadow: none !important;
 }
