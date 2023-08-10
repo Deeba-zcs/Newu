@@ -36,30 +36,30 @@ function Healer() {
 
   return (
     <>
-      <div className="mt-5">
-        <Card className=" " style={{ width: "1100px", marginLeft: "50px" }}>
-          <Card.Header style={{ border: "none" }}>
+      <div className=" mt-5">
+        <Card className="mx-auto" style={{ maxWidth: "1100px" }}>
+          <Card.Header className="bg-transparent border-0">
             <div className="row">
               <div
-                className="col-4"
+                className="col-12 col-md-4"
                 style={{
                   marginTop: "10px",
                   fontSize: "22px",
                   color: "rgb(120, 126, 139)",
                   fontFamily: "Poppins",
-
-                  fontWeight: 800,
+                  fontWeight: "1000!important",
                 }}
               >
-                Add Healer Availability
+                <h3 className="header mb-0">Add Healer Availability</h3>
               </div>
-              <div className="col-8">
+              <div className="col-12 col-md-8 d-flex justify-content-md-end">
                 <Button
+                  className="btn btn-primary"
                   style={{
                     backgroundColor: "rgb(120, 126, 139)",
                     border: "none",
-                    marginLeft: "600px",
-                    marginTop: "10px",
+                    // marginLeft: "600px",
+                    // marginTop: "10px",
                     fontSize: "14px",
                   }}
                 >
@@ -73,19 +73,26 @@ function Healer() {
             <div className="container">
               <form>
                 <Card.Title>
-                  <div className="mt-4 ">
-                    <input
-                      type="text"
-                      className="datadiv"
-                      placeholder="Select Date"
-                    />
+                  <div className="mt-4">
+                    <div>
+                      <input
+                        type="text"
+                        className="datadiv"
+                        placeholder="Select Date"
+                        onFocus={(e) => (e.target.type = "date")}
+                        onBlur={(e) => {
+                          if (!e.target.value) {
+                            e.target.type = "text";
+                          }
+                        }}
+                      />
+                    </div>
                   </div>
                 </Card.Title>
-                <br />
                 <Card.Text>
                   <strong>Selected Type:</strong>
                   <br />
-                  <div className="form-check form-check-inline">
+                  <div className="form-check form-check-inline mt-3">
                     <input
                       className="form-check-input"
                       type="radio"
@@ -106,7 +113,7 @@ function Healer() {
                       value="audio"
                     />
                     <label className="form-check-label" for="voiceRadio">
-                      Voice
+                      Audio
                     </label>
                   </div>
                   <div className="form-check form-check-inline">
@@ -124,36 +131,27 @@ function Healer() {
                 </Card.Text>
                 <Card.Text>
                   <div className="divtimeslot">
-                    <strong>Selected Time:</strong>
-                    <br />
-                    {timeSlots.map((timeSlot, index) => (
-                      <Button key={index} className="btntime">
-                        {timeSlot}
-                      </Button>
-                    ))}
+                    <strong className="mb-3">Selected Time:</strong>
+                    <div className="mt-2">
+                      {timeSlots.map((timeSlot, index) => (
+                        <Button key={index} className="btntime">
+                          {timeSlot}
+                        </Button>
+                      ))}
+                    </div>
                   </div>
                 </Card.Text>
               </form>
             </div>
           </Card.Body>
+
           <Card.Footer className="text-muted">
-            {" "}
-            <Button className="divbtn">ADD</Button>{" "}
-            <Button
-              style={{
-                backgroundColor: "rgb(120, 126, 139)",
-                border: "none",
-                marginBottom: "10px",
-                marginTop: "20px",
-              }}
-            >
-              Cancel
-            </Button>
+            <Button className="divbtn">ADD</Button>
+            <Button className="btn btn-secondary mx-2 mt-2">Cancel</Button>
           </Card.Footer>
         </Card>
       </div>
     </>
   );
 }
-
 export default Healer;
