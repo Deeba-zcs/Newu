@@ -1,15 +1,32 @@
 "use client";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./healer.css";
-// import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
-// import { SingleInputDateRangeField } from "@mui/x-date-pickers-pro/SingleInputDateRangeField";
+import DatePicker from "react-datepicker";
+import moment from "moment";
+import "react-datepicker/dist/react-datepicker.css";
+import { Placeholder } from "react-bootstrap";
+
 function Healer() {
   const timeSlots = generateTimeSlots();
+  const [errorMessage, setErrorMessage] = useState("");
   const [selectedSlots, setSelectedSlots] = useState([]);
 
+  const [dateRange, setDateRange] = useState([null, null]);
+  const [startDate, endDate] = dateRange;
+
+  const startedDate = moment(startDate).format("YYYY-MM-DD");
+  const endedDate = moment(endDate).format("YYYY-MM-DD");
+  console.log("startDate", startedDate);
+
+  console.log("endDate", endedDate);
+  const [selectedStartDate, setSelectedStartDate] = useState(null);
+  const [selectedEndDate, setSelectedEndDate] = useState(null);
+  const [selectedtype, setSelectedtype] = useState(null);
+
   const toggleSlot = (index) => {
+    clearErrorMessage();
     if (selectedSlots.includes(index)) {
       setSelectedSlots(
         selectedSlots.filter((slotIndex) => slotIndex !== index)
@@ -17,7 +34,16 @@ function Healer() {
     } else {
       setSelectedSlots([...selectedSlots, index]);
     }
+    console.log("multipletime", selectedSlots);
   };
+  const getSelectedTimeSlots = () => {
+    return selectedSlots.map((index) => timeSlots[index]);
+  };
+
+  useEffect(() => {
+    console.log("time slots:", getSelectedTimeSlots());
+  }, [selectedSlots]);
+
   function generateTimeSlots() {
     const currentTime = new Date();
     const startTime = new Date(currentTime);
@@ -45,12 +71,57 @@ function Healer() {
 
     return timeSlots;
   }
-  const [selectedSlot, setSelectedSlot] = useState(null);
-
-  const showtime = (index) => {
-    console.log("Selected slot:", index);
-    setSelectedSlot(index);
+  const handleTypeChange = (event) => {
+    setSelectedtype(event.target.value);
   };
+  const clearall = () => {
+    setSelectedSlots([]);
+    setSelectedStartDate(null);
+    setSelectedEndDate(null);
+    setSelectedtype(null);
+    setDateRange([null, null]);
+  };
+  const showdata = () => {
+    if (!startDate || !endDate) {
+      setErrorMessage("Please select a date range.");
+      return false;
+    }
+
+    if (!selectedtype) {
+      setErrorMessage("Please select a type.");
+      return false;
+    }
+
+    if (selectedSlots.length === 0) {
+      setErrorMessage("Please select at least one time slot.");
+
+      return false;
+    } else {
+      setSelectedStartDate(startDate);
+      setSelectedEndDate(endDate);
+
+      selectedtype;
+    }
+    const body = {
+      date: startDate,
+      type: selectedtype,
+      timeArr: selectedSlots,
+    };
+
+    console.log("body", body);
+    fetch(url, {
+      method: "POST",
+      body: body,
+    });
+
+    // console.log("Selected Start Date:", selectedStartDate);
+    // console.log("Selected End Date:", selectedEndDate);
+    // console.log("Selected Time Slots:", getSelectedTimeSlots());
+  };
+  const clearErrorMessage = () => {
+    setErrorMessage("");
+  };
+
   return (
     <>
       <div className=" mt-5">
@@ -69,6 +140,7 @@ function Healer() {
               >
                 <h3 className="header mb-0">Add Healer Availability</h3>
               </div>
+
               <div className="col-12 col-md-6 d-flex justify-content-md-end">
                 <Button
                   className="btn btn-primary"
@@ -78,6 +150,8 @@ function Healer() {
                     fontSize: "14px",
                     paddingLeft: "25px",
                     paddingRight: "25px",
+                    paddingTop: "0px",
+                    paddingBottom: "0px",
                     fontFamily: "Poppins,sans-serif",
                   }}
                 >
@@ -86,44 +160,43 @@ function Healer() {
               </div>
             </div>
           </Card.Header>
-
-          <Card.Body>
-            <div className="containerr">
-              <form className="mx-4">
+          <form className="mx-3">
+            <Card.Body>
+              <div className="containerr  mx-3">
                 <Card.Title>
-                  <div className="mt-4">
+                  <div className="mt-4 mx-3">
                     <div>
-                      <input
-                        type="text"
-                        className="datadiv px-3"
-                        placeholder="   Select Date"
-                        onFocus={(e) => {
-                          e.target.type = "date";
-                          e.target.min = "  yyyy-mm-dd";
+                      <DatePicker
+                        selectsRange={true}
+                        startDate={startDate}
+                        endDate={endDate}
+                        placeholderText=" Select Date"
+                        className="datadiv"
+                        required
+                        onChange={(update) => {
+                          setDateRange(update);
+                          clearErrorMessage();
                         }}
-                        onBlur={(e) => {
-                          if (!e.target.value) {
-                            e.target.type = "text";
-                            e.target.min = null;
-                          }
-                        }}
+                        // isClearable={true}
                       />
                     </div>
-                    {/* <DateRangePicker
-                      slots={{ field: SingleInputDateRangeField }}
-                    /> */}
                   </div>
                 </Card.Title>
                 <Card.Text>
-                  <strong>Select Type:</strong>
+                  <strong className="mx-3">Select Type:</strong>
                   <br />
-                  <div className="form-check form-check-inline mt-3">
+                  <div className="form-check form-check-inline mt-3 mx-3">
                     <input
                       className="form-check-input"
                       type="radio"
                       name="Mode"
                       id="videoRadio"
                       value="video"
+                      checked={selectedtype === "video"}
+                      onChange={(event) => {
+                        handleTypeChange(event);
+                        clearErrorMessage(); // Clear error on type radio change
+                      }}
                     />
                     <label className="form-check-label" for="videoRadio">
                       Video
@@ -136,6 +209,11 @@ function Healer() {
                       name="Mode"
                       id="voiceRadio"
                       value="audio"
+                      checked={selectedtype === "audio"}
+                      onChange={(event) => {
+                        handleTypeChange(event);
+                        clearErrorMessage(); // Clear error on type radio change
+                      }}
                     />
                     <label className="form-check-label" for="voiceRadio">
                       Audio
@@ -148,6 +226,11 @@ function Healer() {
                       name="Mode"
                       id="chatRadio"
                       value="chat"
+                      checked={selectedtype === "chat"}
+                      onChange={(event) => {
+                        handleTypeChange(event);
+                        clearErrorMessage(); // Clear error on type radio change
+                      }}
                     />
                     <label className="form-check-label" for="chatRadio">
                       Chat
@@ -156,8 +239,8 @@ function Healer() {
                 </Card.Text>
                 <Card.Text>
                   <div className="divtimeslot">
-                    <strong className="mb-3">Select Time:</strong>
-                    <div className="mt-2">
+                    <strong className="mb-3 mx-3">Select Time:</strong>
+                    <div className="mt-2 mx-3">
                       <div>
                         {timeSlots.map((timeSlot, index) => (
                           <Button
@@ -185,17 +268,49 @@ function Healer() {
                     </div>
                   </div>
                 </Card.Text>
-              </form>
-            </div>
-          </Card.Body>
+              </div>
+            </Card.Body>
 
-          <Card.Footer className="text-muted">
-            <Button className="divbtn" style={{ backgroundColor: "red" }}>
-              ADD
-            </Button>
-            <Button className="btn btn-secondary  mx-2 divbtn">CANCEL</Button>
-          </Card.Footer>
+            <Card.Footer className="text-muted">
+              <Button
+                className="divbtn"
+                style={{ backgroundColor: "red" }}
+                onClick={showdata}
+              >
+                ADD
+              </Button>
+              <Button
+                className="btn btn-secondary  mx-2 divbtn"
+                onClick={clearall}
+              >
+                CANCEL
+              </Button>
+              <div className="text-end my-1">
+                {errorMessage && (
+                  <p style={{ color: "red", marginBottom: "0" }}>
+                    {errorMessage}
+                  </p>
+                )}
+              </div>
+            </Card.Footer>
+          </form>
         </Card>
+      </div>
+      <div>
+        {selectedStartDate && selectedEndDate && (
+          <div>
+            <p>
+              Selected Start Date:{" "}
+              {moment(selectedStartDate).format("MMMM Do, YYYY")}
+            </p>
+            <p>
+              Selected End Date:{" "}
+              {moment(selectedEndDate).format("MMMM Do, YYYY")}
+            </p>
+            <p>Selected Type: {selectedtype}</p>
+            <p>Selected Time Slots: {getSelectedTimeSlots().join(", ")}</p>
+          </div>
+        )}
       </div>
     </>
   );
