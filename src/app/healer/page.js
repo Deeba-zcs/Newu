@@ -7,22 +7,31 @@ import DatePicker from "react-datepicker";
 import moment from "moment";
 import "react-datepicker/dist/react-datepicker.css";
 import { Placeholder } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { addData } from "../store/dataslice";
 
 function Healer() {
+  const dispatch = useDispatch();
   const timeSlots = generateTimeSlots();
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage1, setErrorMessage1] = useState("");
+  const [errorMessage2, setErrorMessage2] = useState("");
+  const [errorMessage3, setErrorMessage3] = useState("");
+
   const [selectedSlots, setSelectedSlots] = useState([]);
+  const [date, setDate] = useState(new Date());
 
-  const [dateRange, setDateRange] = useState([null, null]);
-  const [startDate, endDate] = dateRange;
+  // const handleCalendarClose = () => console.log("Calendar closed");
+  // const handleCalendarOpen = () => console.log("Calendar opened");
+  // const [dateRange, setDateRange] = useState([null, null]);
+  // const [startDate, endDate] = dateRange;
 
-  const startedDate = moment(startDate).format("YYYY-MM-DD");
-  const endedDate = moment(endDate).format("YYYY-MM-DD");
+  const startedDate = moment(date).format("YYYY-MM-DD");
+  // const endedDate = moment(endDate).format("YYYY-MM-DD");
   console.log("startDate", startedDate);
 
-  console.log("endDate", endedDate);
+  // console.log("endDate", endedDate);
   const [selectedStartDate, setSelectedStartDate] = useState(null);
-  const [selectedEndDate, setSelectedEndDate] = useState(null);
+  // const [selectedEndDate, setSelectedEndDate] = useState(null);
   const [selectedtype, setSelectedtype] = useState(null);
 
   const toggleSlot = (index) => {
@@ -42,7 +51,13 @@ function Healer() {
 
   useEffect(() => {
     console.log("time slots:", getSelectedTimeSlots());
+    // setSelectedStartDate(null);
+    // setDate(null);
   }, [selectedSlots]);
+  // useEffect(() => {
+  //   setSelectedStartDate(null);
+  //   setDate(null);
+  // }, [date]);
 
   function generateTimeSlots() {
     const currentTime = new Date();
@@ -76,50 +91,60 @@ function Healer() {
   };
   const clearall = () => {
     setSelectedSlots([]);
+    setDate(null);
     setSelectedStartDate(null);
-    setSelectedEndDate(null);
+    // setSelectedEndDate(null);
     setSelectedtype(null);
-    setDateRange([null, null]);
   };
   const showdata = () => {
-    if (!startDate || !endDate) {
-      setErrorMessage("Please select a date range.");
+    if (!date) {
+      setErrorMessage1("Please select a date range.");
       return false;
     }
 
     if (!selectedtype) {
-      setErrorMessage("Please select a type.");
+      setErrorMessage2("Please select a type.");
       return false;
     }
 
     if (selectedSlots.length === 0) {
-      setErrorMessage("Please select at least one time slot.");
+      setErrorMessage3("Please select at least one time slot.");
 
       return false;
     } else {
-      setSelectedStartDate(startDate);
-      setSelectedEndDate(endDate);
+      const body = {
+        date: date,
+        type: selectedtype,
+        timeArr: getSelectedTimeSlots(),
+      };
+
+      dispatch(addData({ body }));
+      const existingdata = JSON.parse(localStorage.getItem("getdata")) || [];
+
+     
+      existingdata.push(body);
+
+     
+      localStorage.setItem("getdata", JSON.stringify(existingdata));
+      setSelectedStartDate(date);
+      // setSelectedEndDate(endDate);
 
       selectedtype;
     }
-    const body = {
-      date: startDate,
-      type: selectedtype,
-      timeArr: selectedSlots,
-    };
 
-    console.log("body", body);
-    fetch(url, {
-      method: "POST",
-      body: body,
-    });
+    // fetch(url, {
+    //   method: "POST",
+    //   body: body,
+    // });
 
     // console.log("Selected Start Date:", selectedStartDate);
     // console.log("Selected End Date:", selectedEndDate);
     // console.log("Selected Time Slots:", getSelectedTimeSlots());
   };
   const clearErrorMessage = () => {
-    setErrorMessage("");
+    setErrorMessage1("");
+    setErrorMessage2("");
+    setErrorMessage3("");
   };
 
   return (
@@ -143,7 +168,7 @@ function Healer() {
 
               <div className="col-12 col-md-6 d-flex justify-content-md-end">
                 <Button
-                  className="btn btn-primary"
+                  className=""
                   style={{
                     backgroundColor: "rgb(120, 126, 139)",
                     border: "none",
@@ -167,23 +192,37 @@ function Healer() {
                   <div className="mt-4 mx-3">
                     <div>
                       <DatePicker
-                        selectsRange={true}
-                        startDate={startDate}
-                        endDate={endDate}
-                        placeholderText=" Select Date"
-                        className="datadiv"
-                        required
+                        selected={date}
+                        className="datpik"
                         onChange={(update) => {
-                          setDateRange(update);
+                          setDate(update);
                           clearErrorMessage();
                         }}
+                        placeholderText="  Select Date"
+                        // onCalendarClose={handleCalendarClose}
+                        // onCalendarOpen={handleCalendarOpen}
+
                         // isClearable={true}
                       />
                     </div>
                   </div>
+                  <div className=" my-1">
+                    {errorMessage1 && (
+                      <p
+                        style={{
+                          color: "red",
+                          marginBottom: "0",
+                          marginLeft: "15px",
+                          fontSize: "15px",
+                        }}
+                      >
+                        {errorMessage1}
+                      </p>
+                    )}
+                  </div>
                 </Card.Title>
                 <Card.Text>
-                  <strong className="mx-3">Select Type:</strong>
+                  <strong className="mx-3 my-4">Select Type:</strong>
                   <br />
                   <div className="form-check form-check-inline mt-3 mx-3">
                     <input
@@ -236,6 +275,20 @@ function Healer() {
                       Chat
                     </label>
                   </div>
+                  <div className=" my-1">
+                    {setErrorMessage2 && (
+                      <p
+                        style={{
+                          color: "red",
+                          marginLeft: "15px",
+                          marginBottom: "0",
+                          fontSize: "15px",
+                        }}
+                      >
+                        {errorMessage2}
+                      </p>
+                    )}
+                  </div>
                 </Card.Text>
                 <Card.Text>
                   <div className="divtimeslot">
@@ -267,6 +320,21 @@ function Healer() {
                       </div>
                     </div>
                   </div>
+                  <div className="">
+                    {errorMessage3 && (
+                      <p
+                        style={{
+                          color: "red",
+                          marginLeft: "15px",
+                          marginTop: "-15px",
+
+                          fontSize: "15px",
+                        }}
+                      >
+                        {errorMessage3}
+                      </p>
+                    )}
+                  </div>
                 </Card.Text>
               </div>
             </Card.Body>
@@ -285,27 +353,20 @@ function Healer() {
               >
                 CANCEL
               </Button>
-              <div className="text-end my-1">
-                {errorMessage && (
-                  <p style={{ color: "red", marginBottom: "0" }}>
-                    {errorMessage}
-                  </p>
-                )}
-              </div>
             </Card.Footer>
           </form>
         </Card>
       </div>
       <div>
-        {selectedStartDate && selectedEndDate && (
+        {selectedStartDate && (
           <div>
             <p>
               Selected Start Date:{" "}
               {moment(selectedStartDate).format("MMMM Do, YYYY")}
             </p>
             <p>
-              Selected End Date:{" "}
-              {moment(selectedEndDate).format("MMMM Do, YYYY")}
+              {/* Selected End Date:{" "}
+              {moment(selectedEndDate).format("MMMM Do, YYYY")} */}
             </p>
             <p>Selected Type: {selectedtype}</p>
             <p>Selected Time Slots: {getSelectedTimeSlots().join(", ")}</p>

@@ -7,16 +7,19 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import { AiOutlineDelete } from "react-icons/ai";
 import Link from "next/link";
 import "./sh.css";
-
+import moment from "moment";
 import { useRouter } from "next/navigation";
 
 const AccordionSimple = () => {
   const router = useRouter();
+  const existingdata = JSON.parse(localStorage.getItem("getdata")) || [];
 
-  const direct = () => {
-    console.log("Add Scheduled Time clicked");
-    router.push("/healer");
-  };
+  console.log("existingdtae", existingdata);
+  const datee = moment(existingdata.date).format("YYYY-MM-DD");
+  // const direct = () => {
+  //   console.log("Add Scheduled Time clicked");
+  //   router.push("/healer");
+  // };
   return (
     <>
       <div className=" container header">
@@ -49,7 +52,7 @@ const AccordionSimple = () => {
                 paddingTop: "10px",
               }}
             >
-              2023-08-17
+              {datee}
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -121,7 +124,7 @@ const AccordionSimple = () => {
               </div>
 
               <div className="col-8" style={{ marginLeft: "60px" }}>
-                <button className="btnslot">6:00PM</button>
+                <button className="btnslot"></button>
                 <button className="btnslot">5:00PM</button>
                 <button className="btnslot">4:00PM</button>
                 <button className="btnslot">1:00PM</button>

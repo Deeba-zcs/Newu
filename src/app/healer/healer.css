@@ -13,6 +13,16 @@
   padding: "10px";
   border: "none!important";
 }
+.btnadd {
+  background-color: "rgb(120, 126, 139)";
+  border: none;
+  font-size: 14px;
+  /* padding-left: 25px !important;
+  padding-right: 25px !important;
+  padding-top: 0px;
+  padding-bottom: 0px; */
+  font-family: "Poppins ,sans-serif";
+}
 
 .btntime {
   border-radius: 40px !important;
@@ -67,4 +77,13 @@
   border-color: red !important  ;
   background-color: red !important;
   box-shadow: none !important;
+}
+.datpik {
+  font-size: 15px;
+  color: rgb(120, 126, 139) !important  ;
+}
+@media only screen and (max-width: 991px) {
+  .datadiv {
+    width: 140%;
+  }
 }

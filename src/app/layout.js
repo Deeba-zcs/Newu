@@ -1,6 +1,10 @@
+"use client";
 import "./globals.css";
 import { Inter } from "next/font/google";
-
+import StoreProvider from './store/Provider';
+import store from "./store/page";
+import { persistStore } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -9,6 +13,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  let persistor = persistStore(store);
   return (
     <html lang="en">
       <head>
@@ -44,7 +49,11 @@ export default function RootLayout({ children }) {
           crossorigin="anonymous"
         ></script>
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+      <StoreProvider>
+          <PersistGate persistor={persistor}>{children}</PersistGate>
+        </StoreProvider>
+      </body>
     </html>
   );
 }
