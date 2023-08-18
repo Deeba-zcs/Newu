@@ -1,28 +1,35 @@
-// ** MUI Imports
 "use client";
-import Accordion from "@mui/material/Accordion";
-import Typography from "@mui/material/Typography";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
+import React from "react";
 import { AiOutlineDelete } from "react-icons/ai";
+import {
+  Typography,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+} from "@mui/material";
 import Link from "next/link";
-import "./sh.css";
 import moment from "moment";
-import { useRouter } from "next/navigation";
+import "./sh.css";
 
 const AccordionSimple = () => {
-  const router = useRouter();
-  const existingdata = JSON.parse(localStorage.getItem("getdata")) || [];
+  const existingData = JSON.parse(localStorage.getItem("getdata")) || [];
+  console.log("existingDatasheduled", existingData);
 
-  console.log("existingdtae", existingdata);
-  const datee = moment(existingdata.date).format("YYYY-MM-DD");
-  // const direct = () => {
-  //   console.log("Add Scheduled Time clicked");
-  //   router.push("/healer");
-  // };
+  const dataByDate = {};
+  existingData.forEach((item) => {
+    const formattedDate = moment(item.date).format("MM-DD-YYYY");
+    if (!dataByDate[formattedDate]) {
+      dataByDate[formattedDate] = [];
+    }
+    dataByDate[formattedDate].push(item);
+  });
+  
+  const sortedDates = Object.keys(dataByDate).sort((a, b) =>
+    moment(a).isBefore(b) ? -1 : 1
+  );
   return (
     <>
-      <div className=" container header">
+      <div className="container header">
         <div className="row">
           <div className="col-6" style={{ top: "2px" }}>
             <p className="headerlogo">Scheduled Time List</p>
@@ -38,295 +45,113 @@ const AccordionSimple = () => {
         </div>
       </div>
       <div className="container">
-        <Accordion className="accord">
-          <AccordionSummary
-            id="panel-header-1"
-            aria-controls="panel-content-1"
-            expandIcon={<i class="fa-solid fa-chevron-down"></i>}
-          >
-            <Typography
-              style={{
-                fontWeight: "600",
-                color: "rgba(76, 78, 100, 0.87)",
-                fontSize: "15px",
-                paddingTop: "10px",
-              }}
+        {sortedDates.map((date) => (
+          <Accordion key={date} className="accord">
+            <AccordionSummary
+              expandIcon={<i className="fa-solid fa-chevron-down"></i>}
             >
-              {datee}
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <div className="row acrd  ">
-              <div
-                className="col-2 btnvdo"
-                style={{
-                  fontSize: "12px",
+              <Typography className="databtn">
+                {" "}
+                {moment(date).format("MM-DD-YYYY")}
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              {dataByDate[date].map((item) => (
+                <div key={item.id} className="row acrd">
+                  <div className="col-2">
+                    {item.type === "video" && (
+                      <div
+                        className="col-2"
+                        style={{
+                          fontSize: "13px",
 
-                  color: "red",
-                  backgroundColor: "pink",
-                  margin: "9px",
-                  paddingLeft: "10px",
-                  paddingRight: "10px",
-                  paddingTop: "4px",
-                  paddingBottom: "4px",
-                  width: "50px",
-                  borderRadius: "10px",
-                }}
-              >
-                Video
-              </div>
-              <div className="col-8" style={{ marginLeft: "60px" }}>
-                <button className="btnslot">6:00PM</button>
-                <button className="btnslot">5:00PM</button>
-                <button className="btnslot">4:00PM</button>
-                <button className="btnslot">1:00PM</button>
-                <button className="btnslot">7:00AM</button>
-                <button className="btnslot">1:00PM</button>
-                <button className="btnslot">3:00PM</button>
-              </div>
-              <div className="col-2 text-end ms-5">
-                <i
-                  className="fa fa-pencil pe-1"
-                  aria-hidden="true"
-                  style={{
-                    color: "rgba(76, 78, 100, 0.54)",
-                    fontSize: "14px",
-                  }}
-                ></i>
-                <AiOutlineDelete
-                  style={{
-                    color: "rgba(76, 78, 100, 0.54)",
-                    fontSize: "22px",
-                    paddingLeft: "5px!important",
-                  }}
-                  className="ps-1"
-                />
-              </div>
-            </div>
-            <div className="row acrd">
-              <div
-                className="col-2 btnvdo"
-                style={{
-                  fontSize: "12px",
+                          color: "red",
+                          backgroundColor: "pink",
+                          margin: "9px",
+                          paddingLeft: "10px",
+                          paddingRight: "10px",
+                          paddingTop: "4px",
+                          paddingBottom: "4px",
+                          width: "50px",
+                          borderRadius: "10px",
+                        }}
+                      >
+                        Video
+                      </div>
+                    )}{" "}
+                    {item.type === "audio" && (
+                      <div
+                        className="col-2"
+                        style={{
+                          fontSize: "13px",
 
-                  color: "rgb(38, 198, 249)",
-                  backgroundColor: "rgba(38, 198, 249, 0.3)",
-                  margin: "9px",
-                  paddingLeft: "10px",
-                  paddingRight: "10px",
-                  paddingTop: "4px",
-                  paddingBottom: "4px",
-                  width: "50px",
-                  borderRadius: "10px",
-                }}
-              >
-                Audio
-              </div>
+                          color: "rgb(38, 198, 249)",
+                          backgroundColor: "rgba(38, 198, 249, 0.3)",
+                          margin: "9px",
+                          paddingLeft: "10px",
+                          paddingRight: "10px",
+                          paddingTop: "4px",
+                          paddingBottom: "4px",
+                          width: "50px",
+                          borderRadius: "10px",
+                        }}
+                      >
+                        Audio
+                      </div>
+                    )}
+                    {item.type === "chat" && (
+                      <div
+                        className="col-2"
+                        style={{
+                          fontSize: "13px",
 
-              <div className="col-8" style={{ marginLeft: "60px" }}>
-                <button className="btnslot"></button>
-                <button className="btnslot">5:00PM</button>
-                <button className="btnslot">4:00PM</button>
-                <button className="btnslot">1:00PM</button>
-                <button className="btnslot">7:00AM</button>
-                <button className="btnslot">1:00PM</button>
-                <button className="btnslot">3:00PM</button>
-              </div>
-              <div className="col-2 text-end ms-5 ">
-                <i
-                  class="fa fa-pencil pe-1 "
-                  aria-hidden="true"
-                  style={{
-                    color: "rgba(76, 78, 100, 0.54)",
-                    fontSize: "14px",
-                    cursor: "pointer",
-                  }}
-                ></i>
-                <AiOutlineDelete
-                  style={{
-                    color: "rgba(76, 78, 100, 0.54)",
-                    fontSize: "22px",
-                  }}
-                  className="ps-1"
-                />
-              </div>
-            </div>
-            <div className="row acrd">
-              <div
-                className="col-2"
-                style={{
-                  fontSize: "12px",
-
-                  color: "rgb(253, 181, 40)",
-                  backgroundColor: "rgba(253, 181, 40, 0.1)",
-                  margin: "9px",
-                  paddingLeft: "10px",
-                  paddingRight: "10px",
-                  paddingTop: "4px",
-                  paddingBottom: "4px",
-                  width: "50px",
-                  borderRadius: "10px",
-                }}
-              >
-                Chat
-              </div>
-              <div className="col-8" style={{ marginLeft: "60px" }}>
-                <button className="btnslot">6:00PM</button>
-                <button className="btnslot">5:00PM</button>
-                <button className="btnslot">4:00PM</button>
-                <button className="btnslot">1:00PM</button>
-                <button className="btnslot">7:00AM</button>
-                <button className="btnslot">1:00PM</button>
-                <button className="btnslot">3:00PM</button>
-              </div>
-              <div className="col-2  text-end  ms-5">
-                <i
-                  class="fa fa-pencil  pe-1"
-                  aria-hidden="true"
-                  style={{
-                    color: "rgba(76, 78, 100, 0.54)",
-                    fontSize: "14px",
-                    cursor: "pointer",
-                  }}
-                ></i>
-                <AiOutlineDelete
-                  style={{
-                    color: "rgba(76, 78, 100, 0.54)",
-                    fontSize: "22px",
-                  }}
-                  className="ps-1"
-                />
-              </div>
-            </div>
-          </AccordionDetails>
-        </Accordion>
-
-        <Accordion className="accord">
-          <AccordionSummary
-            id="panel-header-2"
-            aria-controls="panel-content-2"
-            expandIcon={<i class="fa-solid fa-chevron-down"></i>}
-          >
-            <Typography
-              style={{
-                fontWeight: "600",
-                color: "rgba(76, 78, 100, 0.87)",
-                paddingTop: "10px",
-              }}
-            >
-              2023-08-16
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <div className="row acrd">
-              <div
-                className="col-2 btnvdo"
-                style={{
-                  fontSize: "12px",
-
-                  color: "red",
-                  backgroundColor: "pink",
-                  margin: "9px",
-                  paddingLeft: "10px",
-                  paddingRight: "10px",
-                  paddingTop: "4px",
-                  paddingBottom: "4px",
-                  width: "50px",
-                  borderRadius: "10px",
-                }}
-              >
-                Video
-              </div>
-              <div className="col-8 mt-3" style={{ marginLeft: "60px" }}>
-                <button className="btnslot">6:00PM</button>
-                <button className="btnslot">5:00PM</button>
-                <button className="btnslot">4:00PM</button>
-                <button className="btnslot">1:00PM</button>
-                <button className="btnslot">7:00AM</button>
-                <button className="btnslot">1:00PM</button>
-                <button className="btnslot">3:00PM</button>
-              </div>
-              <div className="col-2 text-end ms-5 mt-3">
-                <i
-                  class="fa fa-pencil  pe-1"
-                  aria-hidden="true"
-                  style={{
-                    color: "rgba(76, 78, 100, 0.54)",
-                    fontSize: "14px",
-                    cursor: "pointer",
-                  }}
-                ></i>
-                <AiOutlineDelete
-                  style={{ color: "rgba(76, 78, 100, 0.54)", fontSize: "22px" }}
-                  className="ps-1"
-                />
-              </div>
-            </div>
-          </AccordionDetails>
-        </Accordion>
-
-        <Accordion className="accord">
-          <AccordionSummary
-            id="panel-header-3"
-            aria-controls="panel-content-3"
-            expandIcon={<i class="fa-solid fa-chevron-down"></i>}
-          >
-            <Typography
-              style={{
-                fontWeight: "600",
-                color: "rgba(76, 78, 100, 0.87)",
-                fontSize: "15px",
-                paddingTop: "10px",
-              }}
-            >
-              2023-08-11
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <div className="row acrd">
-              <div
-                className="col-2 btnvdo"
-                style={{
-                  fontSize: "12px",
-
-                  color: "red",
-                  backgroundColor: "pink",
-                  margin: "9px",
-                  paddingLeft: "10px",
-                  paddingRight: "10px",
-                  paddingTop: "4px",
-                  paddingBottom: "4px",
-                  width: "50px",
-                  borderRadius: "10px",
-                }}
-              >
-                Video
-              </div>
-              <div className="col-8" style={{ marginLeft: "60px" }}>
-                <button className="btnslot">6:00PM</button>
-                <button className="btnslot">5:00PM</button>
-              </div>
-              <div className="col-2 text-end ms-5">
-                <i
-                  class="fa fa-pencil  pe-1"
-                  aria-hidden="true"
-                  style={{
-                    color: "rgba(76, 78, 100, 0.54)",
-                    fontSize: "14px",
-                    cursor: "pointer",
-                  }}
-                ></i>
-                <AiOutlineDelete
-                  style={{
-                    color: "rgba(76, 78, 100, 0.54)",
-                    fontSize: "22px",
-                  }}
-                  className="ps-1"
-                />
-              </div>
-            </div>
-          </AccordionDetails>
-        </Accordion>
+                          color: "rgb(253, 181, 40)",
+                          backgroundColor: "rgba(253, 181, 40, 0.1)",
+                          margin: "9px",
+                          paddingLeft: "10px",
+                          paddingRight: "10px",
+                          paddingTop: "4px",
+                          paddingBottom: "4px",
+                          width: "50px",
+                          borderRadius: "10px",
+                        }}
+                      >
+                        Chat
+                      </div>
+                    )}
+                  </div>
+                  <div className="col-8">
+                    {item.timeArr && Array.isArray(item.timeArr)
+                      ? item.timeArr.map((slot) => (
+                          <button key={slot} className="btnslot">
+                            {slot}
+                          </button>
+                        ))
+                      : ""}
+                  </div>
+                  <div className="col-2">
+                    <i
+                      className="fa fa-pencil pe-1"
+                      aria-hidden="true"
+                      style={{
+                        color: "rgba(76, 78, 100, 0.54)",
+                        fontSize: "14px",
+                      }}
+                    ></i>
+                    <AiOutlineDelete
+                      style={{
+                        color: "rgba(76, 78, 100, 0.54)",
+                        fontSize: "22px",
+                        paddingLeft: "5px!important",
+                      }}
+                      className="ps-1"
+                    />
+                  </div>
+                </div>
+              ))}
+            </AccordionDetails>
+          </Accordion>
+        ))}
       </div>
     </>
   );
