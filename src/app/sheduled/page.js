@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { use, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import {
   Typography,
@@ -7,26 +7,51 @@ import {
   AccordionSummary,
   AccordionDetails,
 } from "@mui/material";
-import Link from "next/link";
+
 import moment from "moment";
 import "./sh.css";
-
+import Link from "next/link";
+import { useSelector, useDispatch } from "react-redux";
+import { removeData, editData } from "../Store/dataslice";
 const AccordionSimple = () => {
-  const existingData = JSON.parse(localStorage.getItem("getdata")) || [];
-  console.log("existingDatasheduled", existingData);
+  const dispatch = useDispatch();
+  const existingData = useSelector((state) => state.data.currentdata);
+
+  console.log("existingDataScheduled", existingData);
 
   const dataByDate = {};
   existingData.forEach((item) => {
-    const formattedDate = moment(item.date).format("MM-DD-YYYY");
+    const formattedDate = item.body.date;
+    console.log("formattedDate", formattedDate);
     if (!dataByDate[formattedDate]) {
       dataByDate[formattedDate] = [];
     }
     dataByDate[formattedDate].push(item);
   });
-  
+
+  console.log("datebydte", dataByDate);
+
   const sortedDates = Object.keys(dataByDate).sort((a, b) =>
-    moment(a).isBefore(b) ? -1 : 1
+    moment(a, "MM-DD-YYYY").isBefore(moment(b, "MM-DD-YYYY")) ? -1 : 1
   );
+  const handleRemoveItem = (item) => {
+    console.log("sheduleddelete", item);
+
+    dispatch(removeData({ id: item.id, selectedType: item.body.type }));
+  };
+  const handleEditItem = (item) => {
+    console.log("itemedishduled", item);
+    const momentdate = moment(item.body.date).format("YYYY-MM-DD");
+    dispatch(
+      editData({
+        id: item.id,
+        selectedType: item.body.type,
+        selectedDate: momentdate,
+        selectedTime: item.body.timeArr,
+      })
+    );
+  };
+
   return (
     <>
       <div className="container header">
@@ -59,7 +84,7 @@ const AccordionSimple = () => {
               {dataByDate[date].map((item) => (
                 <div key={item.id} className="row acrd">
                   <div className="col-2">
-                    {item.type === "video" && (
+                    {item.body.type === "video" && (
                       <div
                         className="col-2"
                         style={{
@@ -79,7 +104,7 @@ const AccordionSimple = () => {
                         Video
                       </div>
                     )}{" "}
-                    {item.type === "audio" && (
+                    {item.body.type === "audio" && (
                       <div
                         className="col-2"
                         style={{
@@ -99,7 +124,7 @@ const AccordionSimple = () => {
                         Audio
                       </div>
                     )}
-                    {item.type === "chat" && (
+                    {item.body.type === "chat" && (
                       <div
                         className="col-2"
                         style={{
@@ -121,8 +146,8 @@ const AccordionSimple = () => {
                     )}
                   </div>
                   <div className="col-8">
-                    {item.timeArr && Array.isArray(item.timeArr)
-                      ? item.timeArr.map((slot) => (
+                    {item.body.timeArr && Array.isArray(item.body.timeArr)
+                      ? item.body.timeArr.map((slot) => (
                           <button key={slot} className="btnslot">
                             {slot}
                           </button>
@@ -130,21 +155,28 @@ const AccordionSimple = () => {
                       : ""}
                   </div>
                   <div className="col-2">
-                    <i
-                      className="fa fa-pencil pe-1"
-                      aria-hidden="true"
-                      style={{
-                        color: "rgba(76, 78, 100, 0.54)",
-                        fontSize: "14px",
-                      }}
-                    ></i>
+                    <Link href="/healer">
+                      {" "}
+                      <i
+                        className="fa fa-pencil pe-1"
+                        aria-hidden="true"
+                        style={{
+                          color: "rgba(76, 78, 100, 0.54)",
+                          fontSize: "14px",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => handleEditItem(item)}
+                      ></i>
+                    </Link>
                     <AiOutlineDelete
                       style={{
                         color: "rgba(76, 78, 100, 0.54)",
                         fontSize: "22px",
                         paddingLeft: "5px!important",
+                        cursor: "pointer",
                       }}
                       className="ps-1"
+                      onClick={() => handleRemoveItem(item)}
                     />
                   </div>
                 </div>

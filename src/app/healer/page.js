@@ -6,9 +6,10 @@ import "./healer.css";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import "react-datepicker/dist/react-datepicker.css";
-import { Placeholder } from "react-bootstrap";
+import Link from "next/link";
+import { Router } from "next/navigation";
 import { useDispatch } from "react-redux";
-import { addData } from "../store/dataslice";
+import { addData } from "../Store/dataslice";
 
 function Healer() {
   const dispatch = useDispatch();
@@ -16,24 +17,11 @@ function Healer() {
   const [errorMessage1, setErrorMessage1] = useState("");
   const [errorMessage2, setErrorMessage2] = useState("");
   const [errorMessage3, setErrorMessage3] = useState("");
-
+  const [selectedStartDate, setSelectedStartDate] = useState(null);
   const [selectedSlots, setSelectedSlots] = useState([]);
   const [date, setDate] = useState(new Date());
-
-  // const handleCalendarClose = () => console.log("Calendar closed");
-  // const handleCalendarOpen = () => console.log("Calendar opened");
-  // const [dateRange, setDateRange] = useState([null, null]);
-  // const [startDate, endDate] = dateRange;
-
-  const startedDate = moment(date).format("YYYY-MM-DD");
-  // const endedDate = moment(endDate).format("YYYY-MM-DD");
-  console.log("startDate", startedDate);
-
-  // console.log("endDate", endedDate);
-  const [selectedStartDate, setSelectedStartDate] = useState(null);
-  // const [selectedEndDate, setSelectedEndDate] = useState(null);
   const [selectedtype, setSelectedtype] = useState(null);
-
+  const [editingItem, setEditingItem] = useState(null);
   const toggleSlot = (index) => {
     clearErrorMessage();
     if (selectedSlots.includes(index)) {
@@ -43,21 +31,13 @@ function Healer() {
     } else {
       setSelectedSlots([...selectedSlots, index]);
     }
-    console.log("multipletime", selectedSlots);
   };
+  const startedDate = moment(date).format("YYYY-MM-DD");
+  console.log("statrted dts", startedDate);
+
   const getSelectedTimeSlots = () => {
     return selectedSlots.map((index) => timeSlots[index]);
   };
-
-  useEffect(() => {
-    console.log("time slots:", getSelectedTimeSlots());
-    // setSelectedStartDate(null);
-    // setDate(null);
-  }, [selectedSlots]);
-  // useEffect(() => {
-  //   setSelectedStartDate(null);
-  //   setDate(null);
-  // }, [date]);
 
   function generateTimeSlots() {
     const currentTime = new Date();
@@ -90,62 +70,76 @@ function Healer() {
     setSelectedtype(event.target.value);
   };
   const clearall = () => {
-    setSelectedSlots([]);
     setDate(null);
     setSelectedStartDate(null);
-    // setSelectedEndDate(null);
+    setSelectedSlots([]);
     setSelectedtype(null);
+    clearErrorMessage();
+  };
+
+  const handleSaveChanges = () => {
+    const updatedData = {
+      date: selectedStartDate,
+      type: selectedtype,
+      timeArr: getSelectedTimeSlots(),
+    };
+    dispatch(
+      editData({
+        id: editingItem.id,
+        selectedType: editingItem.body.type,
+        newData: updatedData,
+      })
+    );
+    clearall();
   };
   const showdata = () => {
     if (!date) {
-      setErrorMessage1("Please select a date range.");
-      return false;
+      setErrorMessage1("Please select a date.");
+      return;
     }
 
     if (!selectedtype) {
       setErrorMessage2("Please select a type.");
-      return false;
+      return;
     }
 
     if (selectedSlots.length === 0) {
       setErrorMessage3("Please select at least one time slot.");
-
-      return false;
-    } else {
-      const body = {
-        date: date,
-        type: selectedtype,
-        timeArr: getSelectedTimeSlots(),
-      };
-
-      dispatch(addData({ body }));
-      const existingdata = JSON.parse(localStorage.getItem("getdata")) || [];
-
-     
-      existingdata.push(body);
-
-     
-      localStorage.setItem("getdata", JSON.stringify(existingdata));
-      setSelectedStartDate(date);
-      // setSelectedEndDate(endDate);
-
-      selectedtype;
+      return;
     }
 
-    // fetch(url, {
-    //   method: "POST",
-    //   body: body,
-    // });
+    const body = {
+      date: date,
+      type: selectedtype,
+      timeArr: getSelectedTimeSlots(),
+    };
 
-    // console.log("Selected Start Date:", selectedStartDate);
-    // console.log("Selected End Date:", selectedEndDate);
-    // console.log("Selected Time Slots:", getSelectedTimeSlots());
+    dispatch(addData({ body }));
+    console.log("body", body);
+    setSelectedStartDate(date);
+    selectedtype;
+
+    // const existingdata = JSON.parse(localStorage.getItem("getdata")) || [];
+
+    // existingdata.push(body);
+
+    // localStorage.setItem("getdata", JSON.stringify(existingdata));
   };
+
   const clearErrorMessage = () => {
     setErrorMessage1("");
     setErrorMessage2("");
     setErrorMessage3("");
   };
+
+  // fetch(url, {
+  //   method: "POST",
+  //   body: body,
+  // });
+
+  // console.log("Selected Start Date:", selectedStartDate);
+  // console.log("Selected End Date:", selectedEndDate);
+  // console.log("Selected Time Slots:", getSelectedTimeSlots());
 
   return (
     <>
@@ -190,21 +184,15 @@ function Healer() {
               <div className="containerr  mx-3">
                 <Card.Title>
                   <div className="mt-4 mx-3">
-                    <div>
-                      <DatePicker
-                        selected={date}
-                        className="datpik"
-                        onChange={(update) => {
-                          setDate(update);
-                          clearErrorMessage();
-                        }}
-                        placeholderText="  Select Date"
-                        // onCalendarClose={handleCalendarClose}
-                        // onCalendarOpen={handleCalendarOpen}
-
-                        // isClearable={true}
-                      />
-                    </div>
+                    <DatePicker
+                      selected={date}
+                      className="datpik"
+                      onChange={(update) => {
+                        setDate(update);
+                        clearErrorMessage();
+                      }}
+                      placeholderText="Select Date"
+                    />
                   </div>
                   <div className=" my-1">
                     {errorMessage1 && (
@@ -234,7 +222,7 @@ function Healer() {
                       checked={selectedtype === "video"}
                       onChange={(event) => {
                         handleTypeChange(event);
-                        clearErrorMessage(); // Clear error on type radio change
+                        clearErrorMessage();
                       }}
                     />
                     <label className="form-check-label" for="videoRadio">
@@ -251,7 +239,7 @@ function Healer() {
                       checked={selectedtype === "audio"}
                       onChange={(event) => {
                         handleTypeChange(event);
-                        clearErrorMessage(); // Clear error on type radio change
+                        clearErrorMessage();
                       }}
                     />
                     <label className="form-check-label" for="voiceRadio">
@@ -268,7 +256,7 @@ function Healer() {
                       checked={selectedtype === "chat"}
                       onChange={(event) => {
                         handleTypeChange(event);
-                        clearErrorMessage(); // Clear error on type radio change
+                        clearErrorMessage();
                       }}
                     />
                     <label className="form-check-label" for="chatRadio">
@@ -343,9 +331,9 @@ function Healer() {
               <Button
                 className="divbtn"
                 style={{ backgroundColor: "red" }}
-                onClick={showdata}
+                onClick={editingItem ? handleSaveChanges : showdata}
               >
-                ADD
+                {editingItem ? "Save Changes" : "ADD"}
               </Button>
               <Button
                 className="btn btn-secondary  mx-2 divbtn"
@@ -372,6 +360,7 @@ function Healer() {
             <p>Selected Time Slots: {getSelectedTimeSlots().join(", ")}</p>
           </div>
         )}
+        <Link href="/sheduled">Sheduled</Link>
       </div>
     </>
   );
