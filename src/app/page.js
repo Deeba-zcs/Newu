@@ -5,5 +5,5 @@ import Question from "./Question/page";
 import Healer from "./healer/page";
 
 export default function Home() {
-  return <Question />;
+  return <Healer />;
 }

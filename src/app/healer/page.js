@@ -7,12 +7,12 @@ import DatePicker from "react-datepicker";
 import moment from "moment";
 import "react-datepicker/dist/react-datepicker.css";
 import Link from "next/link";
-import { Router } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { addData } from "../Store/dataslice";
-
+import { useRouter } from "next/navigation";
 function Healer() {
   const dispatch = useDispatch();
+  const router = useRouter();
   const timeSlots = generateTimeSlots();
   const [errorMessage1, setErrorMessage1] = useState("");
   const [errorMessage2, setErrorMessage2] = useState("");
@@ -78,6 +78,7 @@ function Healer() {
   };
 
   const handleSaveChanges = () => {
+    // Dispatch the action to edit the item in the Redux store
     const updatedData = {
       date: selectedStartDate,
       type: selectedtype,
@@ -118,7 +119,7 @@ function Healer() {
     console.log("body", body);
     setSelectedStartDate(date);
     selectedtype;
-
+    //router.push("/sheduled");
     // const existingdata = JSON.parse(localStorage.getItem("getdata")) || [];
 
     // existingdata.push(body);
@@ -161,8 +162,9 @@ function Healer() {
               </div>
 
               <div className="col-12 col-md-6 d-flex justify-content-md-end">
-                <Button
+                <Link
                   className=""
+                  href={"/sheduled"}
                   style={{
                     backgroundColor: "rgb(120, 126, 139)",
                     border: "none",
@@ -175,7 +177,7 @@ function Healer() {
                   }}
                 >
                   <i className="fa-solid fa-plus mx-1 "> </i> ADD
-                </Button>
+                </Link>
               </div>
             </div>
           </Card.Header>
@@ -360,7 +362,7 @@ function Healer() {
             <p>Selected Time Slots: {getSelectedTimeSlots().join(", ")}</p>
           </div>
         )}
-        <Link href="/sheduled">Sheduled</Link>
+        <Link href={'/sheduled'}>Sheduled</Link>
       </div>
     </>
   );
