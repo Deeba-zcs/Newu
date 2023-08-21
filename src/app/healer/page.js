@@ -25,10 +25,10 @@ function Healer() {
   const [errorMessage1, setErrorMessage1] = useState("");
   const [errorMessage2, setErrorMessage2] = useState("");
   const [errorMessage3, setErrorMessage3] = useState("");
-
+  const [buttonText, setButtonText] = useState();
   const [selectedSlots, setSelectedSlots] = useState([]);
   const [date, setDate] = useState();
-  const [buttonText, setButtonText] = useState();
+
   const toggleSlot = (index) => {
     clearErrorMessage();
     if (selectedSlots.includes(index)) {
@@ -89,14 +89,6 @@ function Healer() {
   console.log("selectedDateD", selectedDateD);
 
   useEffect(() => {
-    console.log("UseEffectexistingedittdata", existingeditdata);
-    if (existingeditdata) {
-      setButtonText("Save Changes");
-    } else {
-      setButtonText("ADD");
-    }
-  }, [existingeditdata]);
-  useEffect(() => {
     if (existingeditdata) {
       setSelectedStartDate(existingeditdata.selectedDate);
       // setDate(selectedDateD);
@@ -111,6 +103,22 @@ function Healer() {
     }
   }, [existingeditdata]);
 
+  useEffect(() => {
+    console.log("UseEffectexistingedittdata", existingeditdata);
+
+    if (Object.keys(existingeditdata).length === 0) {
+      setButtonText("ADD");
+    } else {
+      setButtonText("Save Changes");
+    }
+  }, [existingeditdata]);
+  useEffect(() => {
+    if (Object.keys(existingeditdata).length === 0) {
+      setButtonText("Add");
+    } else {
+      setButtonText("Save Changes");
+    }
+  }, [existingeditdata]);
   const handleEditData = () => {
     console.log("handleeditdata call");
     const updatedData = {
@@ -134,32 +142,6 @@ function Healer() {
     dispatch(clearEditObj());
   };
 
-  // const handleSaveChanges = () => {
-  //   const updatedData = {
-  //     selectedDate: selectedStartDate,
-  //     selectedType: selectedtype,
-  //     selectedTime: getSelectedTimeSlots(),
-  //   };
-  //   if (editingItem) {
-  //     // If editing an existing item
-  //     dispatch(
-  //       saveData({
-  //         id: editingItem.id, // Assuming you have an 'id' property for each item
-  //         newData: updatedData,
-  //       })
-  //     );
-  //   } else {
-  //     // If adding a new item
-  //     dispatch(
-  //       addData({
-  //         id: Date.now(), // Generating a unique ID, you can adjust this as needed
-  //         body: updatedData,
-  //       })
-  //     );
-  //   }
-
-  //   clearall();
-  // };
   const showdata = () => {
     if (!date) {
       setErrorMessage1("Please select a date.");
@@ -175,7 +157,6 @@ function Healer() {
       setErrorMessage3("Please select at least one time slot.");
       return;
     }
-
     const body = {
       id: Date.now(),
       date: moment(date).format("MM-DD-YYYY"),
@@ -230,9 +211,8 @@ function Healer() {
               </div>
 
               <div className="col-12 col-md-6 d-flex justify-content-md-end">
-                <Link
+                <Button
                   className=""
-                  href={"/sheduled"}
                   style={{
                     backgroundColor: "rgb(120, 126, 139)",
                     border: "none",
@@ -245,7 +225,7 @@ function Healer() {
                   }}
                 >
                   <i className="fa-solid fa-plus mx-1 "> </i> ADD
-                </Link>
+                </Button>
               </div>
             </div>
           </Card.Header>
@@ -398,15 +378,13 @@ function Healer() {
             </Card.Body>
 
             <Card.Footer className="text-muted">
-              <Button
-                className="divbtn"
-                style={{ backgroundColor: "red" }}
-                onClick={existingeditdata ? handleEditData : showdata}
-                //   onClick={showdata}
-              >
-                {buttonText}
-         
-              </Button>
+            <Button
+          className="divbtn"
+          style={{ backgroundColor: "red" }}
+          onClick={existingeditdata ? handleEditData : showdata}
+        >
+          {buttonText}
+        </Button>
               <Button
                 className="btn btn-secondary  mx-2 divbtn"
                 onClick={clearall}

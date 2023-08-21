@@ -31,7 +31,7 @@ const dataSlice = createSlice({
       if (index !== -1) {
         state.currentdata[index].body = newData;
         console.log("AfterUpdate", state.currentdata[index].body);
-
+        state.currentdata = [...state.currentdata];
         state.editobj = {};
         console.log("state,editobj", state.editobj);
       }
