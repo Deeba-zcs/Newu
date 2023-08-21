@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const dataSlice = createSlice({
   name: "data",
+  initialState: { currentdata: [], editobj: {} },
 
-  initialState: { currentdata: [] },
   reducers: {
     addData(state, action) {
       console.log("storfirst", action.payload);
@@ -19,32 +19,26 @@ const dataSlice = createSlice({
     },
     editData(state, action) {
       console.log("editstore", action.payload);
-      const { id, selectedType, selectedDate, selectedTime, newData } =
-        action.payload;
-      console.log(
-        "id,selectedtype,selctedData,selectedTime",
-        id,
-        selectedType,
-        selectedDate,
-        selectedTime
+      state.editobj = action.payload;
+      console.log("editobj", state.editobj);
+    },
+    saveData(state, action) {
+      const { id, newData, datad } = action.payload;
+      console.log("id == newData==>datad", id, newData, datad);
+      console.log("Before update:", state.currentdata);
+      state.currentdata = datad.map((item) =>
+        item.id === id ? { ...item, ...newData } : item
       );
 
-      const index = state.currentdata.findIndex(
-        (item) =>
-          item.id === id &&
-          item.body.type === selectedType &&
-          item.body.date === selectedDate
-      );
+      console.log("After update:", state.currentdata);
+    },
 
-      if (index !== -1) {
-        const editedItem = { ...state.currentdata[index] };
-        editedItem.body = { ...editedItem.body, ...newData };
-
-        state.currentdata.splice(index, 1, editedItem);
-      }
+    clearEditObj(state) {
+      state.editobj = {};
     },
   },
 });
 
-export const { addData, removeData, editData } = dataSlice.actions;
+export const { addData, removeData, editData, clearEditObj, saveData } =
+  dataSlice.actions;
 export default dataSlice.reducer;

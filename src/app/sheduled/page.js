@@ -9,12 +9,14 @@ import {
 } from "@mui/material";
 
 import moment from "moment";
+import { useRouter } from "next/navigation";
 import "./sh.css";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { removeData, editData } from "../Store/dataslice";
 const AccordionSimple = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const existingData = useSelector((state) => state.data.currentdata);
 
   console.log("existingDataScheduled", existingData);
@@ -44,12 +46,14 @@ const AccordionSimple = () => {
     const momentdate = moment(item.body.date).format("YYYY-MM-DD");
     dispatch(
       editData({
-        id: item.id,
+        id: item.body.id,
         selectedType: item.body.type,
         selectedDate: momentdate,
         selectedTime: item.body.timeArr,
       })
     );
+    console.log("i");
+    router.push("/healer");
   };
 
   return (
@@ -155,19 +159,18 @@ const AccordionSimple = () => {
                       : ""}
                   </div>
                   <div className="col-2">
-                    <Link href="/healer">
-                      {" "}
-                      <i
-                        className="fa fa-pencil pe-1"
-                        aria-hidden="true"
-                        style={{
-                          color: "rgba(76, 78, 100, 0.54)",
-                          fontSize: "14px",
-                          cursor: "pointer",
-                        }}
-                        onClick={() => handleEditItem(item)}
-                      ></i>
-                    </Link>
+                    {/* <Link href="/healer"> */}{" "}
+                    <i
+                      className="fa fa-pencil pe-1"
+                      aria-hidden="true"
+                      style={{
+                        color: "rgba(76, 78, 100, 0.54)",
+                        fontSize: "14px",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => handleEditItem(item)}
+                    ></i>
+                    {/* </Link> */}
                     <AiOutlineDelete
                       style={{
                         color: "rgba(76, 78, 100, 0.54)",

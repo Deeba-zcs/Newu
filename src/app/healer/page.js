@@ -7,21 +7,28 @@ import DatePicker from "react-datepicker";
 import moment from "moment";
 import "react-datepicker/dist/react-datepicker.css";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
-import { addData } from "../Store/dataslice";
+import { useSelector, useDispatch } from "react-redux";
+import { addData, editData, clearEditObj, saveData } from "../Store/dataslice";
 import { useRouter } from "next/navigation";
+
 function Healer() {
   const dispatch = useDispatch();
   const router = useRouter();
+  const existingeditdata = useSelector((state) => state.data.editobj);
+  console.log("existingeditdata", existingeditdata);
+  const existingDataHealer = useSelector((state) => state.data.currentdata);
+  const [selectedStartDate, setSelectedStartDate] = useState();
+  const [selectedtype, setSelectedtype] = useState();
+  const [editingItem, setEditingItem] = useState(null);
+
   const timeSlots = generateTimeSlots();
   const [errorMessage1, setErrorMessage1] = useState("");
   const [errorMessage2, setErrorMessage2] = useState("");
   const [errorMessage3, setErrorMessage3] = useState("");
-  const [selectedStartDate, setSelectedStartDate] = useState(null);
+
   const [selectedSlots, setSelectedSlots] = useState([]);
-  const [date, setDate] = useState(new Date());
-  const [selectedtype, setSelectedtype] = useState(null);
-  const [editingItem, setEditingItem] = useState(null);
+  const [date, setDate] = useState();
+
   const toggleSlot = (index) => {
     clearErrorMessage();
     if (selectedSlots.includes(index)) {
@@ -32,8 +39,8 @@ function Healer() {
       setSelectedSlots([...selectedSlots, index]);
     }
   };
-  const startedDate = moment(date).format("YYYY-MM-DD");
-  console.log("statrted dts", startedDate);
+  const startedDate = moment(date).format("MM/DD/YYYY");
+  // console.log("statrted dts", startedDate);
 
   const getSelectedTimeSlots = () => {
     return selectedSlots.map((index) => timeSlots[index]);
@@ -58,11 +65,11 @@ function Healer() {
         hour: "2-digit",
         minute: "2-digit",
       });
-      console.log("timeformat", formattedTime);
+      // console.log("timeformat", formattedTime);
       timeSlots.push(formattedTime);
       currentTimeSlot.setTime(currentTimeSlot.getTime() + timeIncrement);
     }
-    console.log("button", timeSlots);
+    // console.log("button", timeSlots);
 
     return timeSlots;
   }
@@ -77,22 +84,72 @@ function Healer() {
     clearErrorMessage();
   };
 
-  const handleSaveChanges = () => {
-    // Dispatch the action to edit the item in the Redux store
+  console.log("existeditdatadate", existingeditdata.selectedDate);
+  const selectedDateD = moment(selectedStartDate).format("MM/DD/YYYY");
+  console.log("selectedDateD", selectedDateD);
+  useEffect(() => {
+    if (existingeditdata) {
+      setSelectedStartDate(existingeditdata.selectedDate);
+      // setDate(selectedDateD);
+      setSelectedtype(existingeditdata.selectedType);
+
+      const timeArr = existingeditdata.selectedTime || [];
+      const slots = generateTimeSlots();
+
+      const selectedSlotIndices = timeArr.map((time) => slots.indexOf(time));
+
+      setSelectedSlots(selectedSlotIndices);
+    }
+  }, [existingeditdata]);
+
+  const handleEditData = () => {
+    console.log("handleeditdata call");
     const updatedData = {
       date: selectedStartDate,
-      type: selectedtype,
+      id: existingeditdata.id,
+
       timeArr: getSelectedTimeSlots(),
+      type: selectedtype,
     };
+    console.log("updatedatasavdata", updatedData);
+
     dispatch(
-      editData({
-        id: editingItem.id,
-        selectedType: editingItem.body.type,
+      saveData({
+        id: existingeditdata.id,
         newData: updatedData,
+        datad: existingDataHealer,
       })
     );
-    clearall();
+
+    // clearall();
   };
+
+  // const handleSaveChanges = () => {
+  //   const updatedData = {
+  //     selectedDate: selectedStartDate,
+  //     selectedType: selectedtype,
+  //     selectedTime: getSelectedTimeSlots(),
+  //   };
+  //   if (editingItem) {
+  //     // If editing an existing item
+  //     dispatch(
+  //       saveData({
+  //         id: editingItem.id, // Assuming you have an 'id' property for each item
+  //         newData: updatedData,
+  //       })
+  //     );
+  //   } else {
+  //     // If adding a new item
+  //     dispatch(
+  //       addData({
+  //         id: Date.now(), // Generating a unique ID, you can adjust this as needed
+  //         body: updatedData,
+  //       })
+  //     );
+  //   }
+
+  //   clearall();
+  // };
   const showdata = () => {
     if (!date) {
       setErrorMessage1("Please select a date.");
@@ -110,14 +167,15 @@ function Healer() {
     }
 
     const body = {
-      date: date,
+      id: Date.now(),
+      date: moment(date).format("MM-DD-YYYY"),
       type: selectedtype,
       timeArr: getSelectedTimeSlots(),
     };
 
     dispatch(addData({ body }));
     console.log("body", body);
-    setSelectedStartDate(date);
+    setSelectedStartDate(moment(date).format("MM-DD-YYYY"));
     selectedtype;
     //router.push("/sheduled");
     // const existingdata = JSON.parse(localStorage.getItem("getdata")) || [];
@@ -333,9 +391,11 @@ function Healer() {
               <Button
                 className="divbtn"
                 style={{ backgroundColor: "red" }}
-                onClick={editingItem ? handleSaveChanges : showdata}
+                onClick={existingeditdata ? handleEditData : showdata}
+                //  onClick={}
               >
-                {editingItem ? "Save Changes" : "ADD"}
+                {existingeditdata ? "Save Changes" : "ADD"}
+                {/* //   Add */}
               </Button>
               <Button
                 className="btn btn-secondary  mx-2 divbtn"
@@ -362,7 +422,7 @@ function Healer() {
             <p>Selected Time Slots: {getSelectedTimeSlots().join(", ")}</p>
           </div>
         )}
-        <Link href={'/sheduled'}>Sheduled</Link>
+        <Link href={"/sheduled"}>Sheduled</Link>
       </div>
     </>
   );
