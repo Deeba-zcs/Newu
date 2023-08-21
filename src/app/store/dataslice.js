@@ -24,15 +24,18 @@ const dataSlice = createSlice({
     },
     saveData(state, action) {
       const { id, newData, datad } = action.payload;
-      console.log("id == newData==>datad", id, newData, datad);
-      console.log("Before update:", state.currentdata);
-      state.currentdata = datad.map((item) =>
-        item.id === id ? { ...item, ...newData } : item
-      );
+      console.log("dtatasd", datad);
 
-      console.log("After update:", state.currentdata);
+      const index = datad.findIndex((item) => item.body.id === id);
+      console.log("index", index);
+      if (index !== -1) {
+        state.currentdata[index].body = newData;
+        console.log("AfterUpdate", state.currentdata[index].body);
+
+        state.editobj = {};
+        console.log("state,editobj", state.editobj);
+      }
     },
-
     clearEditObj(state) {
       state.editobj = {};
     },

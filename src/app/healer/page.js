@@ -28,7 +28,7 @@ function Healer() {
 
   const [selectedSlots, setSelectedSlots] = useState([]);
   const [date, setDate] = useState();
-
+  const [buttonText, setButtonText] = useState();
   const toggleSlot = (index) => {
     clearErrorMessage();
     if (selectedSlots.includes(index)) {
@@ -87,6 +87,15 @@ function Healer() {
   console.log("existeditdatadate", existingeditdata.selectedDate);
   const selectedDateD = moment(selectedStartDate).format("MM/DD/YYYY");
   console.log("selectedDateD", selectedDateD);
+
+  useEffect(() => {
+    console.log("UseEffectexistingedittdata", existingeditdata);
+    if (existingeditdata) {
+      setButtonText("Save Changes");
+    } else {
+      setButtonText("ADD");
+    }
+  }, [existingeditdata]);
   useEffect(() => {
     if (existingeditdata) {
       setSelectedStartDate(existingeditdata.selectedDate);
@@ -121,7 +130,8 @@ function Healer() {
       })
     );
 
-    // clearall();
+    clearall();
+    dispatch(clearEditObj());
   };
 
   // const handleSaveChanges = () => {
@@ -392,10 +402,10 @@ function Healer() {
                 className="divbtn"
                 style={{ backgroundColor: "red" }}
                 onClick={existingeditdata ? handleEditData : showdata}
-                //  onClick={}
+                //   onClick={showdata}
               >
-                {existingeditdata ? "Save Changes" : "ADD"}
-                {/* //   Add */}
+                {buttonText}
+         
               </Button>
               <Button
                 className="btn btn-secondary  mx-2 divbtn"
