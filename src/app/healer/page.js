@@ -86,12 +86,12 @@ function Healer() {
 
   console.log("existeditdatadate", existingeditdata.selectedDate);
   const selectedDateD = moment(selectedStartDate).format("MM/DD/YYYY");
-  console.log("selectedDateD", selectedDateD);
 
   useEffect(() => {
     if (existingeditdata) {
+      console.log("selectedDateD", existingeditdata.selectedDate);
       setSelectedStartDate(existingeditdata.selectedDate);
-      // setDate(selectedDateD);
+      setDate(moment(existingeditdata.selectedDat).toDate());
       setSelectedtype(existingeditdata.selectedType);
 
       const timeArr = existingeditdata.selectedTime || [];
@@ -112,13 +112,7 @@ function Healer() {
       setButtonText("Save Changes");
     }
   }, [existingeditdata]);
-  useEffect(() => {
-    if (Object.keys(existingeditdata).length === 0) {
-      setButtonText("Add");
-    } else {
-      setButtonText("Save Changes");
-    }
-  }, [existingeditdata]);
+
   const handleEditData = () => {
     console.log("handleeditdata call");
     const updatedData = {
@@ -163,10 +157,10 @@ function Healer() {
       type: selectedtype,
       timeArr: getSelectedTimeSlots(),
     };
-
+    console.log("body", body);
     dispatch(addData({ body }));
     console.log("body", body);
-    setSelectedStartDate(moment(date).format("MM-DD-YYYY"));
+    // setSelectedStartDate(moment(date).format("MM-DD-YYYY"));
     selectedtype;
     //router.push("/sheduled");
     // const existingdata = JSON.parse(localStorage.getItem("getdata")) || [];
@@ -378,13 +372,13 @@ function Healer() {
             </Card.Body>
 
             <Card.Footer className="text-muted">
-            <Button
-          className="divbtn"
-          style={{ backgroundColor: "red" }}
-          onClick={existingeditdata ? handleEditData : showdata}
-        >
-          {buttonText}
-        </Button>
+              <Button
+                className="divbtn"
+                style={{ backgroundColor: "red" }}
+                onClick={existingeditdata ? handleEditData : showdata}
+              >
+                {buttonText}
+              </Button>
               <Button
                 className="btn btn-secondary  mx-2 divbtn"
                 onClick={clearall}

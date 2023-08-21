@@ -22,6 +22,7 @@ const dataSlice = createSlice({
       state.editobj = action.payload;
       console.log("editobj", state.editobj);
     },
+    
     saveData(state, action) {
       const { id, newData, datad } = action.payload;
       console.log("dtatasd", datad);
