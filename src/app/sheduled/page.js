@@ -85,6 +85,7 @@ const AccordionSimple = () => {
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
+              {console.log("dataByDate[date]", dataByDate[date])}
               {dataByDate[date].map((item) => (
                 <div key={item.id} className="row acrd">
                   <div className="col-2">
@@ -150,13 +151,17 @@ const AccordionSimple = () => {
                     )}
                   </div>
                   <div className="col-8">
-                    {item.body.timeArr && Array.isArray(item.body.timeArr)
-                      ? item.body.timeArr.map((slot) => (
-                          <button key={slot} className="btnslot">
-                            {slot}
-                          </button>
-                        ))
-                      : ""}
+                    {console.log("item.body.timeArr", item.body.timeArr)}
+
+                    {item.body.timeArr.map((slot) => {
+                      console.log("slot:", slot);
+
+                      return (
+                        <button key={slot} className="btnslot">
+                          {slot}
+                        </button>
+                      );
+                    })}
                   </div>
                   <div className="col-2">
                     {/* <Link href="/healer"> */}{" "}
