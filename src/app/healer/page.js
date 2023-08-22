@@ -92,7 +92,7 @@ function Healer() {
     if (existingeditdata) {
       console.log("selectedDateD", existingeditdata.selectedDate);
       setSelectedStartDate(existingeditdata.selectedDate);
-      setDate(moment(existingeditdata.selectedDat).toDate());
+      setDate(moment(existingeditdata.selectedDate).toDate());
       setSelectedtype(existingeditdata.selectedType);
 
       const timeArr = existingeditdata.selectedTime || [];
