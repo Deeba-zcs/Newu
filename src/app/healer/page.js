@@ -10,6 +10,7 @@ import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { addData, editData, clearEditObj, saveData } from "../Store/dataslice";
 import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
 
 function Healer() {
   const dispatch = useDispatch();
@@ -112,6 +113,14 @@ function Healer() {
       setButtonText("Save Changes");
     }
   }, [existingeditdata]);
+  const handleClick = () => {
+    console.log("handleclick");
+    if (Object.keys(existingeditdata).length === 0) {
+      showdata();
+    } else {
+      handleEditData();
+    }
+  };
 
   const handleEditData = () => {
     console.log("handleeditdata call");
@@ -168,6 +177,7 @@ function Healer() {
     // existingdata.push(body);
 
     // localStorage.setItem("getdata", JSON.stringify(existingdata));
+    clearall();
   };
 
   const clearErrorMessage = () => {
@@ -375,10 +385,11 @@ function Healer() {
               <Button
                 className="divbtn"
                 style={{ backgroundColor: "red" }}
-                onClick={existingeditdata ? handleEditData : showdata}
+                onClick={handleClick}
               >
                 {buttonText}
               </Button>
+
               <Button
                 className="btn btn-secondary  mx-2 divbtn"
                 onClick={clearall}
@@ -409,4 +420,4 @@ function Healer() {
     </>
   );
 }
-export default Healer;
+export default dynamic(() => Promise.resolve(Healer), { ssr: false });
