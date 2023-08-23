@@ -24,6 +24,20 @@
   font-family: "Poppins ,sans-serif";
 }
 
+.headerbtn {
+  background-color: rgb(120, 126, 139) !important ;
+  border: none !important;
+  justify-content: end;
+  font-size: "14px";
+  text-align: center;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
+  padding-top: "0px";
+  padding-bottom: "0px";
+  border-radius: 10px;
+  color: #fff !important;
+  font-family: "Poppins,sans-serif";
+}
 .btntime {
   border-radius: 40px !important;
   background-color: rgb(120, 126, 139) !important;

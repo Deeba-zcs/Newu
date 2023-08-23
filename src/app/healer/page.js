@@ -244,23 +244,9 @@ function Healer() {
                 <h3 className="header mb-0">Add Healer Availability</h3>
               </div>
 
-              <div className="col-12 col-md-6 d-flex justify-content-md-end">
-                <Button
-                  className=""
-                  style={{
-                    backgroundColor: "rgb(120, 126, 139)",
-                    border: "none",
-                    fontSize: "14px",
-                    paddingLeft: "25px",
-                    paddingRight: "25px",
-                    paddingTop: "0px",
-                    paddingBottom: "0px",
-                    fontFamily: "Poppins,sans-serif",
-                  }}
-                >
-                  <i className="fa-solid fa-plus mx-1 "> </i> ADD
-                </Button>
-              </div>
+              <button className="headerbtn">
+                <i className="fa-solid fa-plus mx-1 "> </i> ADD
+              </button>
             </div>
           </Card.Header>
           <form className="mx-3">
@@ -374,8 +360,8 @@ function Healer() {
                             style={{
                               backgroundColor: selectedSlots.includes(index)
                                 ? "red"
-                                : disselectedSlots.includes(index) 
-                                ? "rgb(138, 143, 87)" 
+                                : disselectedSlots.includes(index)
+                                ? "rgb(138, 143, 87)"
                                 : "rgb(120, 126, 139)",
                               color: selectedSlots.includes(index)
                                 ? "white"
