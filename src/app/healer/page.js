@@ -18,15 +18,17 @@ function Healer() {
   const existingeditdata = useSelector((state) => state.data.editobj);
   console.log("existingeditdata", existingeditdata);
   const existingDataHealer = useSelector((state) => state.data.currentdata);
+  console.log("existingdatahealer", existingDataHealer);
   const [selectedStartDate, setSelectedStartDate] = useState();
   const [selectedtype, setSelectedtype] = useState();
-  const [editingItem, setEditingItem] = useState(null);
+  //const [editingItem, setEditingItem] = useState(null);
 
   const timeSlots = generateTimeSlots();
   const [errorMessage1, setErrorMessage1] = useState("");
   const [errorMessage2, setErrorMessage2] = useState("");
   const [errorMessage3, setErrorMessage3] = useState("");
   const [buttonText, setButtonText] = useState();
+  const [disselectedSlots, setdisSelectedSlots] = useState([]);
   const [selectedSlots, setSelectedSlots] = useState([]);
   const [date, setDate] = useState();
 
@@ -41,8 +43,36 @@ function Healer() {
     }
   };
   const startedDate = moment(date).format("MM/DD/YYYY");
-  // console.log("statrted dts", startedDate);
 
+  console.log("statrted dts", startedDate);
+
+  console.log("existingDataHealer", existingDataHealer);
+
+  const checkdata = (update) => {
+    console.log("checkdatacall");
+    const selectedDateFormatted = moment(update).format("MM-DD-YYYY");
+    console.log("selecteddate", selectedDateFormatted);
+    console.log("time", timeSlots);
+    console.log("existingDataHealer", existingDataHealer);
+
+    const matchingData = existingDataHealer?.find(
+      (check) => check.body.date === selectedDateFormatted
+    );
+    console.log("matchingdata", matchingData);
+    console.log("time", timeSlots);
+
+    if (matchingData) {
+      const matchingTimeSlots = matchingData.body.timeArr;
+      const matchingSlotIndices = matchingTimeSlots.map((time) =>
+        timeSlots.indexOf(time)
+      );
+      console.log("disable", matchingSlotIndices);
+      setdisSelectedSlots(matchingSlotIndices);
+    } else {
+      setSelectedSlots([]);
+    }
+  };
+  console.log("disable slot", disselectedSlots);
   const getSelectedTimeSlots = () => {
     return selectedSlots.map((index) => timeSlots[index]);
   };
@@ -66,11 +96,10 @@ function Healer() {
         hour: "2-digit",
         minute: "2-digit",
       });
-      // console.log("timeformat", formattedTime);
+
       timeSlots.push(formattedTime);
       currentTimeSlot.setTime(currentTimeSlot.getTime() + timeIncrement);
     }
-    // console.log("button", timeSlots);
 
     return timeSlots;
   }
@@ -120,6 +149,7 @@ function Healer() {
     } else {
       handleEditData();
     }
+    //  setSelectedSlots([]);
   };
 
   const handleEditData = () => {
@@ -242,6 +272,7 @@ function Healer() {
                       selected={date}
                       className="datpik"
                       onChange={(update) => {
+                        checkdata(update);
                         setDate(update);
                         clearErrorMessage();
                       }}
@@ -343,6 +374,8 @@ function Healer() {
                             style={{
                               backgroundColor: selectedSlots.includes(index)
                                 ? "red"
+                                : disselectedSlots.includes(index) 
+                                ? "rgb(138, 143, 87)" 
                                 : "rgb(120, 126, 139)",
                               color: selectedSlots.includes(index)
                                 ? "white"
@@ -353,6 +386,11 @@ function Healer() {
                               border: "none",
                               fontSize: "14px",
                               fontFamily: "Poppins",
+                              pointerEvents:
+                                selectedSlots.includes(index) ||
+                                disselectedSlots.includes(index)
+                                  ? "none" // Disable the button if it's in either selected or disselected slots
+                                  : "auto",
                             }}
                             onClick={() => toggleSlot(index)}
                           >
